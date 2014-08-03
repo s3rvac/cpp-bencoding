@@ -11,6 +11,7 @@
 
 #include "BInteger.h"
 #include "Decoder.h"
+#include "TestUtils.h"
 
 namespace bencoding {
 namespace tests {
@@ -43,6 +44,7 @@ TEST_F(DecoderTests,
 IntegerZeroIsCorrectlyDecoded) {
 	std::shared_ptr<BItem> bItem{decoder->decode("i0e")};
 
+	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
 	auto bInteger = bItem->as<BInteger>();
 	ASSERT_EQ(0, bInteger->value());
