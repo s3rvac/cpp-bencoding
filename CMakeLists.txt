@@ -33,6 +33,29 @@ set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib")
 include_directories(include)
 
 ##
+## Compiler options.
+##
+
+# C++11 is required.
+set(CMAKE_CXX_FLAGS "-std=c++11 -pedantic")
+
+# Abort compilation upon the first error.
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wfatal-errors")
+
+# Standard warning parameters.
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+
+# Enable additional warnings that are not included in -Wall and -Wextra
+# (according to `man gcc`).
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-align")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wcast-qual")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wfloat-equal")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wold-style-cast")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wswitch-default")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wuninitialized")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wuseless-cast")
+
+##
 ## Subdirectories.
 ##
 
