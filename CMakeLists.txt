@@ -10,6 +10,13 @@ cmake_minimum_required(VERSION 2.8)
 project(cpp-bencoding CXX)
 
 ##
+## Options.
+##
+
+option(WITH_DOC "Build API documentation (requires Doxygen)." ON)
+option(WITH_TESTS "Build tests (requires Google Test)." ON)
+
+##
 ## Paths.
 ##
 

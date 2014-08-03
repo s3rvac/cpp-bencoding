@@ -6,6 +6,10 @@
 ## CMake configuration file for the tests of the library.
 ##
 
+if(NOT WITH_TESTS)
+	return()
+endif()
+
 find_package(GTest REQUIRED)
 
 set(TESTS_SOURCES

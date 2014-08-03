@@ -6,6 +6,10 @@
 ## CMake configuration file for the API documentation.
 ##
 
+if(NOT WITH_DOC)
+	return()
+endif()
+
 find_package(Doxygen REQUIRED)
 
 set(DOXYGEN_CFG_IN "doxygen.in")
