@@ -15,6 +15,7 @@ project(cpp-bencoding CXX)
 
 set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install")
 set(INSTALL_BIN_DIR "${CMAKE_INSTALL_PREFIX}/bin")
+set(INSTALL_DOC_DIR "${CMAKE_INSTALL_PREFIX}/doc")
 set(INSTALL_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/include")
 set(INSTALL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/lib")
 
@@ -28,6 +29,7 @@ include_directories(include)
 ## Subdirectories.
 ##
 
+add_subdirectory(doc)
 add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(tests)
