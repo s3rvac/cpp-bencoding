@@ -42,9 +42,9 @@ void DecoderTests::assertDecodedAs(
 }
 
 TEST_F(DecoderTests,
-IntegerZeroIsCorrectlyDecodedFromStream) {
-	std::istringstream input{"i0e"};
-	std::shared_ptr<BItem> bItem{decoder->decode(input)};
+IntegerZeroIsCorrectlyDecoded) {
+	std::string data{"i0e"};
+	std::shared_ptr<BItem> bItem{decoder->decode(data)};
 
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
@@ -53,9 +53,9 @@ IntegerZeroIsCorrectlyDecodedFromStream) {
 }
 
 TEST_F(DecoderTests,
-IntegerZeroIsCorrectlyDecodedFromString) {
-	std::string data{"i0e"};
-	std::shared_ptr<BItem> bItem{decoder->decode(data)};
+DecodeFromStreamWorksAsDecodeFromString) {
+	std::istringstream input{"i0e"};
+	std::shared_ptr<BItem> bItem{decoder->decode(input)};
 
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
