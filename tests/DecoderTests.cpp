@@ -6,6 +6,7 @@
 */
 
 #include <memory>
+#include <sstream>
 
 #include <gtest/gtest.h>
 
@@ -41,8 +42,20 @@ void DecoderTests::assertDecodedAs(
 }
 
 TEST_F(DecoderTests,
-IntegerZeroIsCorrectlyDecoded) {
-	std::shared_ptr<BItem> bItem{decoder->decode("i0e")};
+IntegerZeroIsCorrectlyDecodedFromStream) {
+	std::istringstream input{"i0e"};
+	std::shared_ptr<BItem> bItem{decoder->decode(input)};
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BInteger>(bItem);
+	auto bInteger = bItem->as<BInteger>();
+	ASSERT_EQ(0, bInteger->value());
+}
+
+TEST_F(DecoderTests,
+IntegerZeroIsCorrectlyDecodedFromString) {
+	std::string data{"i0e"};
+	std::shared_ptr<BItem> bItem{decoder->decode(data)};
 
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);

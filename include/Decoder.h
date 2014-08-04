@@ -25,6 +25,7 @@ public:
 	static std::unique_ptr<Decoder> create();
 
 	std::unique_ptr<BItem> decode(const std::string &data) const;
+	std::unique_ptr<BItem> decode(std::istream &input) const;
 
 public:
 	Decoder();

@@ -7,6 +7,8 @@
 
 #include "Decoder.h"
 
+#include <sstream>
+
 #include "BInteger.h"
 
 namespace bencoding {
@@ -27,6 +29,15 @@ std::unique_ptr<Decoder> Decoder::create() {
 * @brief Decodes the given bencoded data and returns them.
 */
 std::unique_ptr<BItem> Decoder::decode(const std::string &data) const {
+	std::istringstream input{data};
+	return decode(input);
+}
+
+/**
+* @brief Reads all the data from the given @a input, decodes them and returns
+*        them.
+*/
+std::unique_ptr<BItem> Decoder::decode(std::istream &input) const {
 	// TODO
 	return BInteger::create(0);
 }
