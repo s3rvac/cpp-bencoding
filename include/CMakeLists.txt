@@ -14,6 +14,7 @@ set(INCLUDES
 	BString.h
 	Decoder.h
 	Encoder.h
+	Utils.h
 )
 
 install(FILES ${INCLUDES} DESTINATION "${INSTALL_INCLUDE_DIR}/bencoding")

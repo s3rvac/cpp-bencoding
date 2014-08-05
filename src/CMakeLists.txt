@@ -14,6 +14,7 @@ set(BENCODING_SOURCES
 	BString.cpp
 	Decoder.cpp
 	Encoder.cpp
+	Utils.cpp
 )
 
 add_library(bencoding ${BENCODING_SOURCES})

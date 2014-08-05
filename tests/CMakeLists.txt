@@ -19,6 +19,7 @@ set(TESTS_SOURCES
 	BStringTests.cpp
 	DecoderTests.cpp
 	EncoderTests.cpp
+	UtilsTests.cpp
 )
 
 add_executable(tests ${TESTS_SOURCES})
