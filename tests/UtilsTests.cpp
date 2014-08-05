@@ -120,5 +120,37 @@ StrToNumWithInvalidHexadecimalIntegerFails) {
 	EXPECT_EQ(-1, num);
 }
 
+//
+// readUntil()
+//
+
+TEST_F(UtilsTests,
+ReadUntilReadsCorrectlyAllCharactersUntilSentinel) {
+	std::istringstream input("abcd$");
+	std::string readData;
+
+	bool dataReadCorrectly = readUntil(input, readData, '$');
+	ASSERT_TRUE(dataReadCorrectly);
+	EXPECT_EQ(readData, "abcd");
+}
+
+TEST_F(UtilsTests,
+ReadUntilReturnsFalseWhenSentinelIsNotFound) {
+	std::istringstream input("abcd");
+	std::string readData;
+
+	bool dataReadCorrectly = readUntil(input, readData, '$');
+	ASSERT_FALSE(dataReadCorrectly);
+}
+
+TEST_F(UtilsTests,
+ReadUntilStoresReadCharsEvenWhenSentinelIsNotFound) {
+	std::istringstream input("abcd");
+	std::string readData;
+
+	readUntil(input, readData, '$');
+	ASSERT_EQ("abcd", readData);
+}
+
 } // namespace tests
 } // namespace bencoding
