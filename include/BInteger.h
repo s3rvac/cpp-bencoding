@@ -8,8 +8,8 @@
 #ifndef BENCODING_BINTEGER_H
 #define BENCODING_BINTEGER_H
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 
 #include "BItem.h"
 
