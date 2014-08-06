@@ -33,4 +33,29 @@ bool readUpTo(std::istream &stream, std::string &readData, char sentinel) {
 	return stream && stream.peek() == sentinel;
 }
 
+/**
+* @brief Reads data from the given @a stream until @a last, which is also read.
+*
+* @param[in] stream Stream from which the data are read.
+* @param[out] readData String into which the read data are stored.
+* @param[in] last The last character to be read.
+*
+* @return @c true if all the data were read correctly up and including @a last,
+*         @c false otherwise.
+*
+* In contrast to readUpTo(), @a last is also read into @a readData. If @a last
+* is not found during the reading, this function returns @c false. Read data
+* are appended into @a readData.
+*/
+bool readUntil(std::istream &stream, std::string &readData, char last) {
+	char c;
+	while (stream.get(c)) {
+		readData += c;
+		if (c == last) {
+			return true;
+		}
+	}
+	return false;
+}
+
 } // namespace bencoding

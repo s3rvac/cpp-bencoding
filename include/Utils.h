@@ -40,6 +40,7 @@ bool strToNum(const std::string &str, N &num,
 }
 
 bool readUpTo(std::istream &stream, std::string &readData, char sentinel);
+bool readUntil(std::istream &stream, std::string &readData, char last);
 
 } // namespace bencoding
 

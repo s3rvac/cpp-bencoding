@@ -152,5 +152,37 @@ ReadUpToStoresReadCharsEvenWhenSentinelIsNotFound) {
 	ASSERT_EQ("abcd", readData);
 }
 
+//
+// readUntil()
+//
+
+TEST_F(UtilsTests,
+ReadUntilReadsCorrectlyAllCharactersIncludingLast) {
+	std::istringstream input("abcd$");
+	std::string readData;
+
+	bool dataReadCorrectly = readUntil(input, readData, '$');
+	ASSERT_TRUE(dataReadCorrectly);
+	EXPECT_EQ(readData, "abcd$");
+}
+
+TEST_F(UtilsTests,
+ReadUntilToReturnsFalseWhenLastIsNotFound) {
+	std::istringstream input("abcd");
+	std::string readData;
+
+	bool dataReadCorrectly = readUntil(input, readData, '$');
+	ASSERT_FALSE(dataReadCorrectly);
+}
+
+TEST_F(UtilsTests,
+ReadUntilStoresReadCharsEvenWhenLastIsNotFound) {
+	std::istringstream input("abcd");
+	std::string readData;
+
+	readUntil(input, readData, '$');
+	ASSERT_EQ("abcd", readData);
+}
+
 } // namespace tests
 } // namespace bencoding
