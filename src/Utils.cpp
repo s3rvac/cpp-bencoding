@@ -10,11 +10,12 @@
 namespace bencoding {
 
 /**
-* @brief Reads data from the given @a stream until @a sentinel is found.
+* @brief Reads data from the given @a stream up to @a sentinel, which is left
+*        in @a stream.
 *
 * @param[in] stream Stream from which the data are read.
 * @param[out] readData String into which the read data are stored.
-* @param[in] sentinel The data are read until this character is encountered.
+* @param[in] sentinel The data are up to this character.
 *
 * @return @c true if all the data were read correctly up to @a sentinel, @c
 *         false otherwise.
@@ -23,7 +24,7 @@ namespace bencoding {
 * found during the reading, this function returns @c false. Read data are
 * appended into @a readData.
 */
-bool readUntil(std::istream &stream, std::string &readData, char sentinel) {
+bool readUpTo(std::istream &stream, std::string &readData, char sentinel) {
 	// Do not use std::getline() because it eats the sentinel from the stream.
 	while (stream.peek() != std::char_traits<char>::eof() &&
 			stream.peek() != sentinel) {

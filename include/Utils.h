@@ -39,7 +39,7 @@ bool strToNum(const std::string &str, N &num,
 	return false;
 }
 
-bool readUntil(std::istream &stream, std::string &readData, char sentinel);
+bool readUpTo(std::istream &stream, std::string &readData, char sentinel);
 
 } // namespace bencoding
 

@@ -121,34 +121,34 @@ StrToNumWithInvalidHexadecimalIntegerFails) {
 }
 
 //
-// readUntil()
+// readUpTo()
 //
 
 TEST_F(UtilsTests,
-ReadUntilReadsCorrectlyAllCharactersUntilSentinel) {
+ReadUpToReadsCorrectlyAllCharactersUpToSentinel) {
 	std::istringstream input("abcd$");
 	std::string readData;
 
-	bool dataReadCorrectly = readUntil(input, readData, '$');
+	bool dataReadCorrectly = readUpTo(input, readData, '$');
 	ASSERT_TRUE(dataReadCorrectly);
 	EXPECT_EQ(readData, "abcd");
 }
 
 TEST_F(UtilsTests,
-ReadUntilReturnsFalseWhenSentinelIsNotFound) {
+ReadUpToReturnsFalseWhenSentinelIsNotFound) {
 	std::istringstream input("abcd");
 	std::string readData;
 
-	bool dataReadCorrectly = readUntil(input, readData, '$');
+	bool dataReadCorrectly = readUpTo(input, readData, '$');
 	ASSERT_FALSE(dataReadCorrectly);
 }
 
 TEST_F(UtilsTests,
-ReadUntilStoresReadCharsEvenWhenSentinelIsNotFound) {
+ReadUpToStoresReadCharsEvenWhenSentinelIsNotFound) {
 	std::istringstream input("abcd");
 	std::string readData;
 
-	readUntil(input, readData, '$');
+	readUpTo(input, readData, '$');
 	ASSERT_EQ("abcd", readData);
 }
 
