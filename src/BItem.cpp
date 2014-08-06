@@ -10,8 +10,13 @@
 namespace bencoding {
 
 /**
+* @brief Constructs the item.
+*/
+BItem::BItem() = default;
+
+/**
 * @brief Destructs the item.
 */
-BItem::~BItem() {}
+BItem::~BItem() = default;
 
 } // namespace bencoding

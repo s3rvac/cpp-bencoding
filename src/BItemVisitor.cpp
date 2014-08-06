@@ -9,4 +9,14 @@
 
 namespace bencoding {
 
+/**
+* @brief Constructs the visitor.
+*/
+BItemVisitor::BItemVisitor() = default;
+
+/**
+* @brief Destructs the visitor.
+*/
+BItemVisitor::~BItemVisitor() = default;
+
 } // namespace bencoding

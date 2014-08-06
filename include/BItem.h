@@ -52,7 +52,7 @@ public:
 	}
 
 protected:
-	BItem() = default;
+	BItem();
 };
 
 } // namespace bencoding

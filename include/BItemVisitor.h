@@ -21,12 +21,12 @@ class BInteger;
 */
 class BItemVisitor {
 public:
-	virtual ~BItemVisitor() = default;
+	virtual ~BItemVisitor();
 
 	virtual void visit(BInteger *bInteger) = 0;
 
 protected:
-	BItemVisitor() = default;
+	BItemVisitor();
 };
 
 } // namespace bencoding
