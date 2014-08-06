@@ -50,6 +50,9 @@ public:
 
 		return std::dynamic_pointer_cast<T>(shared_from_this());
 	}
+
+protected:
+	BItem() = default;
 };
 
 } // namespace bencoding
