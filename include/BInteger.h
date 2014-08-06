@@ -31,6 +31,11 @@ public:
 	ValueType value() const;
 	void setValue(ValueType value);
 
+	/// @name BItemVisitor Support
+	/// @{
+	virtual void accept(BItemVisitor *visitor) override;
+	/// @}
+
 private:
 	explicit BInteger(ValueType value);
 

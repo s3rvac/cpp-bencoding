@@ -12,12 +12,31 @@
 
 namespace bencoding {
 
+class BItemVisitor;
+
 /**
 * @brief Base class for all items (integers, strings, etc.).
 */
 class BItem: public std::enable_shared_from_this<BItem> {
 public:
 	virtual ~BItem() = 0;
+
+	/// @name BItemVisitor Support
+	/// @{
+
+	/**
+	* @brief Accepts the item by the given @a visitor.
+	*
+	* Subclasses should implement this function in this way:
+	* @code
+	* void Subclass::accept(BItemVisitor *visitor) {
+	*     visitor->visit(this);
+	* }
+	* @endcode
+	*/
+	virtual void accept(BItemVisitor *visitor) = 0;
+
+	/// @}
 
 	/**
 	* @brief Casts the item to the given subclass of BItem.

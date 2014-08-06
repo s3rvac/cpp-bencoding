@@ -7,6 +7,8 @@
 
 #include "BInteger.h"
 
+#include "BItemVisitor.h"
+
 namespace bencoding {
 
 /**
@@ -33,6 +35,10 @@ auto BInteger::value() const -> ValueType {
 */
 void BInteger::setValue(ValueType value) {
 	_value = value;
+}
+
+void BInteger::accept(BItemVisitor *visitor) {
+	visitor->visit(this);
 }
 
 } // namespace bencoding

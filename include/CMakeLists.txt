@@ -10,6 +10,7 @@ set(INCLUDES
 	BDictionary.h
 	BInteger.h
 	BItem.h
+	BItemVisitor.h
 	BList.h
 	BString.h
 	Decoder.h

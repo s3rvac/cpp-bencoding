@@ -10,6 +10,7 @@ set(BENCODING_SOURCES
 	BDictionary.cpp
 	BInteger.cpp
 	BItem.cpp
+	BItemVisitor.cpp
 	BList.cpp
 	BString.cpp
 	Decoder.cpp
