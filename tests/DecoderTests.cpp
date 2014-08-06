@@ -41,6 +41,10 @@ void DecoderTests::assertDecodedAs(
 		<< "got " << typeid(*bItem).name();
 }
 
+//
+// Integer decoding.
+//
+
 TEST_F(DecoderTests,
 IntegerZeroIsCorrectlyDecoded) {
 	std::string data{"i0e"};
@@ -50,6 +54,92 @@ IntegerZeroIsCorrectlyDecoded) {
 	assertDecodedAs<BInteger>(bItem);
 	auto bInteger = bItem->as<BInteger>();
 	ASSERT_EQ(0, bInteger->value());
+}
+
+TEST_F(DecoderTests,
+PositiveIntegerIsCorrectlyDecoded) {
+	std::shared_ptr<BItem> bItem{decoder->decode("i13e")};
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BInteger>(bItem);
+	auto bInteger = bItem->as<BInteger>();
+	ASSERT_EQ(13, bInteger->value());
+}
+
+TEST_F(DecoderTests,
+ExplicitlyPositiveIntegerIsCorrectlyDecoded) {
+	std::shared_ptr<BItem> bItem{decoder->decode("i+13e")};
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BInteger>(bItem);
+	auto bInteger = bItem->as<BInteger>();
+	ASSERT_EQ(+13, bInteger->value());
+}
+
+TEST_F(DecoderTests,
+NegativeIntegerIsCorrectlyDecoded) {
+	std::shared_ptr<BItem> bItem{decoder->decode("i-13e")};
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BInteger>(bItem);
+	auto bInteger = bItem->as<BInteger>();
+	ASSERT_EQ(-13, bInteger->value());
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenDecodingIntegerWithoutEndingE) {
+	ASSERT_THROW(decoder->decode("i13"), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenDecodingIntegerWithoutValue) {
+	ASSERT_THROW(decoder->decode("ie"), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenDecodingIntegerWithBeginningWhitespace) {
+	ASSERT_THROW(decoder->decode("i 1e"), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenDecodingIntegerWithTrailingWhitespace) {
+	ASSERT_THROW(decoder->decode("i1 e"), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenDecodingIntegerOfInvalidValue) {
+	EXPECT_THROW(decoder->decode("i e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i+e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i-e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i1-e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i1+e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i$e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i1.1e"), DecodingError);
+}
+
+//
+// Other.
+//
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenInputIsEmpty) {
+	ASSERT_THROW(decoder->decode(""), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenInputIsAtEnd) {
+	std::istringstream input{""};
+	ASSERT_THROW(decoder->decode(input), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenInputBeginsWithInvalidSymbol) {
+	EXPECT_THROW(decoder->decode("$"), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenInputBeginsWithUnexpectedSymbol) {
+	EXPECT_THROW(decoder->decode("e"), DecodingError);
 }
 
 TEST_F(DecoderTests,

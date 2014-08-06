@@ -8,6 +8,7 @@
 #ifndef BENCODING_DECODER_H
 #define BENCODING_DECODER_H
 
+#include <exception>
 #include <memory>
 #include <string>
 
@@ -15,8 +16,22 @@
 
 namespace bencoding {
 
+class BInteger;
+
+/**
+* @brief Exception thrown when there is an error during the decoding.
+*/
+class DecodingError: public std::runtime_error {
+public:
+	explicit DecodingError(const std::string &what);
+};
+
 /**
 * @brief Decoder of bencoded data.
+*
+* The format is based on the <a
+* href="https://wiki.theory.org/BitTorrentSpecification#Bencoding">BitTorrent
+* specification</a>.
 *
 * Use create() to create instances.
 */
@@ -29,6 +44,12 @@ public:
 
 public:
 	Decoder();
+
+private:
+	std::unique_ptr<BInteger> decodeInteger(std::istream &input) const;
+	std::string readEncodedInteger(std::istream &input) const;
+	std::unique_ptr<BInteger> decodeEncodedInteger(
+		const std::string &encodedInteger) const;
 };
 
 } // namespace bencoding
