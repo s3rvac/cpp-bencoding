@@ -37,7 +37,7 @@ std::unique_ptr<Decoder> Decoder::create() {
 /**
 * @brief Decodes the given bencoded data and returns them.
 */
-std::unique_ptr<BItem> Decoder::decode(const std::string &data) const {
+std::unique_ptr<BItem> Decoder::decode(const std::string &data) {
 	std::istringstream input{data};
 	return decode(input);
 }
@@ -46,7 +46,7 @@ std::unique_ptr<BItem> Decoder::decode(const std::string &data) const {
 * @brief Reads all the data from the given @a input, decodes them and returns
 *        them.
 */
-std::unique_ptr<BItem> Decoder::decode(std::istream &input) const {
+std::unique_ptr<BItem> Decoder::decode(std::istream &input) {
 	switch (input.peek()) {
 		case 'i':
 			return decodeInteger(input);
