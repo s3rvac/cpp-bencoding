@@ -42,10 +42,9 @@ public:
 	std::unique_ptr<BItem> decode(const std::string &data) const;
 	std::unique_ptr<BItem> decode(std::istream &input) const;
 
-public:
+private:
 	Decoder();
 
-private:
 	std::unique_ptr<BInteger> decodeInteger(std::istream &input) const;
 	std::string readEncodedInteger(std::istream &input) const;
 	std::unique_ptr<BInteger> decodeEncodedInteger(
