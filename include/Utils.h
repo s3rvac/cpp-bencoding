@@ -15,6 +15,9 @@
 
 namespace bencoding {
 
+/// @name Conversions
+/// @{
+
 /**
 * @brief Converts the given string into a number
 *
@@ -39,8 +42,15 @@ bool strToNum(const std::string &str, N &num,
 	return false;
 }
 
+/// @}
+
+/// @name Data Reading
+/// @{
+
 bool readUpTo(std::istream &stream, std::string &readData, char sentinel);
 bool readUntil(std::istream &stream, std::string &readData, char last);
+
+/// @}
 
 } // namespace bencoding
 
