@@ -38,7 +38,7 @@ std::unique_ptr<Decoder> Decoder::create() {
 * @brief Decodes the given bencoded data and returns them.
 */
 std::unique_ptr<BItem> Decoder::decode(const std::string &data) {
-	std::istringstream input{data};
+	std::istringstream input(data);
 	return decode(input);
 }
 
@@ -102,7 +102,7 @@ std::string Decoder::readEncodedInteger(std::istream &input) const {
 std::unique_ptr<BInteger> Decoder::decodeEncodedInteger(
 		const std::string &encodedInteger) const {
 	// See the description of decodeInteger() for the format and example.
-	std::regex integerRegex{"i([-+]?(0|[1-9][0-9]*))e"};
+	std::regex integerRegex("i([-+]?(0|[1-9][0-9]*))e");
 	std::smatch match;
 	bool valid = std::regex_match(encodedInteger, match, integerRegex);
 	if (!valid) {

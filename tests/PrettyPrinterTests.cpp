@@ -29,21 +29,21 @@ protected:
 
 TEST_F(PrettyPrinterTests,
 PrettyReprOfIntegerZeroIsCorrect) {
-	std::shared_ptr<BItem> data{BInteger::create(0)};
+	std::shared_ptr<BItem> data(BInteger::create(0));
 
 	ASSERT_EQ("0", printer->getPrettyRepr(data));
 }
 
 TEST_F(PrettyPrinterTests,
 PrettyReprOfIntegerWithPositiveValueIsCorrect) {
-	std::shared_ptr<BItem> data{BInteger::create(13)};
+	std::shared_ptr<BItem> data(BInteger::create(13));
 
 	ASSERT_EQ("13", printer->getPrettyRepr(data));
 }
 
 TEST_F(PrettyPrinterTests,
 PrettyReprOfIntegerWithNegativeValueIsCorrect) {
-	std::shared_ptr<BItem> data{BInteger::create(-13)};
+	std::shared_ptr<BItem> data(BInteger::create(-13));
 
 	ASSERT_EQ("-13", printer->getPrettyRepr(data));
 }

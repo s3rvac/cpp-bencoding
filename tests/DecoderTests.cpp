@@ -47,8 +47,8 @@ void DecoderTests::assertDecodedAs(
 
 TEST_F(DecoderTests,
 IntegerZeroIsCorrectlyDecoded) {
-	std::string data{"i0e"};
-	std::shared_ptr<BItem> bItem{decoder->decode(data)};
+	std::string data("i0e");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
 
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
@@ -58,7 +58,7 @@ IntegerZeroIsCorrectlyDecoded) {
 
 TEST_F(DecoderTests,
 PositiveIntegerIsCorrectlyDecoded) {
-	std::shared_ptr<BItem> bItem{decoder->decode("i13e")};
+	std::shared_ptr<BItem> bItem(decoder->decode("i13e"));
 
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
@@ -68,7 +68,7 @@ PositiveIntegerIsCorrectlyDecoded) {
 
 TEST_F(DecoderTests,
 ExplicitlyPositiveIntegerIsCorrectlyDecoded) {
-	std::shared_ptr<BItem> bItem{decoder->decode("i+13e")};
+	std::shared_ptr<BItem> bItem(decoder->decode("i+13e"));
 
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
@@ -78,7 +78,7 @@ ExplicitlyPositiveIntegerIsCorrectlyDecoded) {
 
 TEST_F(DecoderTests,
 NegativeIntegerIsCorrectlyDecoded) {
-	std::shared_ptr<BItem> bItem{decoder->decode("i-13e")};
+	std::shared_ptr<BItem> bItem(decoder->decode("i-13e"));
 
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
@@ -138,7 +138,7 @@ DecodeThrowsDecodingErrorWhenInputIsEmpty) {
 
 TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenInputIsAtEnd) {
-	std::istringstream input{""};
+	std::istringstream input("");
 	ASSERT_THROW(decoder->decode(input), DecodingError);
 }
 
@@ -154,8 +154,8 @@ DecodeThrowsDecodingErrorWhenInputBeginsWithUnexpectedSymbol) {
 
 TEST_F(DecoderTests,
 DecodeFromStreamWorksAsDecodeFromString) {
-	std::istringstream input{"i0e"};
-	std::shared_ptr<BItem> bItem{decoder->decode(input)};
+	std::istringstream input("i0e");
+	std::shared_ptr<BItem> bItem(decoder->decode(input));
 
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);

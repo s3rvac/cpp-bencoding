@@ -36,7 +36,7 @@ std::string Encoder::encode(std::shared_ptr<BItem> data) {
 void Encoder::visit(BInteger *bInteger) {
 	// See the description of Decoder::decodeInteger() for the format and
 	// example.
-	std::string encodedInteger{"i" + std::to_string(bInteger->value()) + "e"};
+	std::string encodedInteger("i" + std::to_string(bInteger->value()) + "e");
 	encodedItems.push(encodedInteger);
 }
 

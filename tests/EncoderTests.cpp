@@ -29,21 +29,21 @@ protected:
 
 TEST_F(EncoderTests,
 IntegerWithZeroValueIsCorrectlyEncoded) {
-	std::shared_ptr<BItem> data{BInteger::create(0)};
+	std::shared_ptr<BItem> data(BInteger::create(0));
 
 	ASSERT_EQ("i0e", encoder->encode(data));
 }
 
 TEST_F(EncoderTests,
 IntegerWithPositiveValueIsCorrectlyEncoded) {
-	std::shared_ptr<BItem> data{BInteger::create(13)};
+	std::shared_ptr<BItem> data(BInteger::create(13));
 
 	ASSERT_EQ("i13e", encoder->encode(data));
 }
 
 TEST_F(EncoderTests,
 IntegerWithNegativeValueIsCorrectlyEncoded) {
-	std::shared_ptr<BItem> data{BInteger::create(-13)};
+	std::shared_ptr<BItem> data(BInteger::create(-13));
 
 	ASSERT_EQ("i-13e", encoder->encode(data));
 }
