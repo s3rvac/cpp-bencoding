@@ -15,6 +15,7 @@ set(INCLUDES
 	BString.h
 	Decoder.h
 	Encoder.h
+	PrettyPrinter.h
 	Utils.h
 )
 

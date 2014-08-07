@@ -15,6 +15,7 @@ set(BENCODING_SOURCES
 	BString.cpp
 	Decoder.cpp
 	Encoder.cpp
+	PrettyPrinter.cpp
 	Utils.cpp
 )
 
