@@ -2,7 +2,7 @@
 * @file      Encoder.h
 * @copyright (c) 2014 by Petr Zemek (s3rvac@gmail.com) and contributors
 * @license   BSD, see the @c LICENSE file for more details
-* @brief     Encoder of bencoded data.
+* @brief     Data encoder.
 */
 
 #ifndef BENCODING_ENCODER_H
@@ -19,7 +19,7 @@ namespace bencoding {
 class BItem;
 
 /**
-* @brief Encoder of bencoded data.
+* @brief Data encoder.
 *
 * The format is based on the <a
 * href="https://wiki.theory.org/BitTorrentSpecification#Bencoding">BitTorrent
