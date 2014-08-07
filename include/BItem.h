@@ -53,6 +53,11 @@ public:
 
 protected:
 	BItem();
+
+private:
+	// Disable copy construction and assignment for this class and subclasses.
+	BItem(const BItem &) = delete;
+	BItem &operator=(const BItem &) = delete;
 };
 
 } // namespace bencoding
