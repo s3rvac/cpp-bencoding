@@ -20,7 +20,7 @@ TEST_F(BIntegerTests,
 ValueReturnsCorrectValueAfterCreation) {
 	auto i = BInteger::create(5);
 
-	ASSERT_EQ(5, i->value());
+	EXPECT_EQ(5, i->value());
 }
 
 TEST_F(BIntegerTests,
@@ -28,7 +28,7 @@ ValueReturnsCorrectValueAfterSet) {
 	auto i = BInteger::create(5);
 	i->setValue(10);
 
-	ASSERT_EQ(10, i->value());
+	EXPECT_EQ(10, i->value());
 }
 
 } // namespace tests

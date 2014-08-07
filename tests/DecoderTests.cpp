@@ -36,7 +36,7 @@ void DecoderTests::assertDecodedAs(
 
 	ASSERT_NE(bItem, nullptr)
 		<< "expected a correctly decoded item";
-	ASSERT_NE(bItem->as<T>(), nullptr)
+	EXPECT_NE(bItem->as<T>(), nullptr)
 		<< "expected " << typeid(T).name() << ", "
 		<< "got " << typeid(*bItem).name();
 }
@@ -53,7 +53,7 @@ IntegerZeroIsCorrectlyDecoded) {
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
 	auto bInteger = bItem->as<BInteger>();
-	ASSERT_EQ(0, bInteger->value());
+	EXPECT_EQ(0, bInteger->value());
 }
 
 TEST_F(DecoderTests,
@@ -63,7 +63,7 @@ PositiveIntegerIsCorrectlyDecoded) {
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
 	auto bInteger = bItem->as<BInteger>();
-	ASSERT_EQ(13, bInteger->value());
+	EXPECT_EQ(13, bInteger->value());
 }
 
 TEST_F(DecoderTests,
@@ -73,7 +73,7 @@ ExplicitlyPositiveIntegerIsCorrectlyDecoded) {
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
 	auto bInteger = bItem->as<BInteger>();
-	ASSERT_EQ(+13, bInteger->value());
+	EXPECT_EQ(+13, bInteger->value());
 }
 
 TEST_F(DecoderTests,
@@ -83,27 +83,27 @@ NegativeIntegerIsCorrectlyDecoded) {
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
 	auto bInteger = bItem->as<BInteger>();
-	ASSERT_EQ(-13, bInteger->value());
+	EXPECT_EQ(-13, bInteger->value());
 }
 
 TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenDecodingIntegerWithoutEndingE) {
-	ASSERT_THROW(decoder->decode("i13"), DecodingError);
+	EXPECT_THROW(decoder->decode("i13"), DecodingError);
 }
 
 TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenDecodingIntegerWithoutValue) {
-	ASSERT_THROW(decoder->decode("ie"), DecodingError);
+	EXPECT_THROW(decoder->decode("ie"), DecodingError);
 }
 
 TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenDecodingIntegerWithBeginningWhitespace) {
-	ASSERT_THROW(decoder->decode("i 1e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i 1e"), DecodingError);
 }
 
 TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenDecodingIntegerWithTrailingWhitespace) {
-	ASSERT_THROW(decoder->decode("i1 e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i1 e"), DecodingError);
 }
 
 TEST_F(DecoderTests,
@@ -113,7 +113,7 @@ DecodeThrowsDecodingErrorWhenDecodingIntegerIsPaddedWithZeros) {
 	// "Only the significant digits should be used, one cannot pad the Integer
 	//  with zeroes. such as i04e."
 	//
-	ASSERT_THROW(decoder->decode("i001e"), DecodingError);
+	EXPECT_THROW(decoder->decode("i001e"), DecodingError);
 }
 
 TEST_F(DecoderTests,
@@ -133,13 +133,13 @@ DecodeThrowsDecodingErrorWhenDecodingIntegerOfInvalidValue) {
 
 TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenInputIsEmpty) {
-	ASSERT_THROW(decoder->decode(""), DecodingError);
+	EXPECT_THROW(decoder->decode(""), DecodingError);
 }
 
 TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenInputIsAtEnd) {
 	std::istringstream input("");
-	ASSERT_THROW(decoder->decode(input), DecodingError);
+	EXPECT_THROW(decoder->decode(input), DecodingError);
 }
 
 TEST_F(DecoderTests,
@@ -160,7 +160,7 @@ DecodeFromStreamWorksAsDecodeFromString) {
 	ADD_SCOPED_TRACE;
 	assertDecodedAs<BInteger>(bItem);
 	auto bInteger = bItem->as<BInteger>();
-	ASSERT_EQ(0, bInteger->value());
+	EXPECT_EQ(0, bInteger->value());
 }
 
 } // namespace tests

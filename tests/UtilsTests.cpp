@@ -141,7 +141,7 @@ ReadUpToReturnsFalseWhenSentinelIsNotFound) {
 	std::string readData;
 
 	bool dataReadCorrectly = readUpTo(input, readData, '$');
-	ASSERT_FALSE(dataReadCorrectly);
+	EXPECT_FALSE(dataReadCorrectly);
 }
 
 TEST_F(UtilsTests,
@@ -150,7 +150,7 @@ ReadUpToStoresReadCharsEvenWhenSentinelIsNotFound) {
 	std::string readData;
 
 	readUpTo(input, readData, '$');
-	ASSERT_EQ("abcd", readData);
+	EXPECT_EQ("abcd", readData);
 }
 
 //
@@ -173,7 +173,7 @@ ReadUntilToReturnsFalseWhenLastIsNotFound) {
 	std::string readData;
 
 	bool dataReadCorrectly = readUntil(input, readData, '$');
-	ASSERT_FALSE(dataReadCorrectly);
+	EXPECT_FALSE(dataReadCorrectly);
 }
 
 TEST_F(UtilsTests,
@@ -182,7 +182,7 @@ ReadUntilStoresReadCharsEvenWhenLastIsNotFound) {
 	std::string readData;
 
 	readUntil(input, readData, '$');
-	ASSERT_EQ("abcd", readData);
+	EXPECT_EQ("abcd", readData);
 }
 
 //
@@ -192,7 +192,7 @@ ReadUntilStoresReadCharsEvenWhenLastIsNotFound) {
 template <class ContainerType>
 void scenarioClearEmptiesContainer(ContainerType &container) {
 	clear(container);
-	ASSERT_TRUE(container.empty());
+	EXPECT_TRUE(container.empty());
 }
 
 TEST_F(UtilsTests,
