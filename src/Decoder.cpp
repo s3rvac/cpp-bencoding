@@ -51,8 +51,8 @@ std::unique_ptr<BItem> Decoder::decode(std::istream &input) {
 		case 'i':
 			return decodeInteger(input);
 		default:
-			throw DecodingError("unexpected character: '" +
-				std::to_string(input.peek()) + "'");
+			throw DecodingError(std::string("unexpected character: '") +
+				static_cast<char>(input.peek()) + "'");
 	}
 
 	assert(false && "should never happen");
