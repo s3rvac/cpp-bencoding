@@ -107,6 +107,16 @@ DecodeThrowsDecodingErrorWhenDecodingIntegerWithTrailingWhitespace) {
 }
 
 TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenDecodingIntegerIsPaddedWithZeros) {
+	// From https://wiki.theory.org/BitTorrentSpecification#Bencoding:
+	//
+	// "Only the significant digits should be used, one cannot pad the Integer
+	//  with zeroes. such as i04e."
+	//
+	ASSERT_THROW(decoder->decode("i001e"), DecodingError);
+}
+
+TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenDecodingIntegerOfInvalidValue) {
 	EXPECT_THROW(decoder->decode("i e"), DecodingError);
 	EXPECT_THROW(decoder->decode("i+e"), DecodingError);

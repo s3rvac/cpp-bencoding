@@ -71,6 +71,11 @@ std::unique_ptr<BItem> Decoder::decode(std::istream &input) {
 * @code
 * i3e represents the integer 3
 * @endcode
+*
+* Moreover, only the significant digits should be used, one cannot pad the
+* integer with zeroes, such as @c i04e (see the <a
+* href="https://wiki.theory.org/BitTorrentSpecification#Bencoding">
+* specification</a>).
 */
 std::unique_ptr<BInteger> Decoder::decodeInteger(std::istream &input) const {
 	return decodeEncodedInteger(readEncodedInteger(input));
@@ -97,7 +102,7 @@ std::string Decoder::readEncodedInteger(std::istream &input) const {
 std::unique_ptr<BInteger> Decoder::decodeEncodedInteger(
 		const std::string &encodedInteger) const {
 	// See the description of decodeInteger() for the format and example.
-	std::regex integerRegex{"i([-+]?[0-9]+)e"};
+	std::regex integerRegex{"i([-+]?(0|[1-9][0-9]*))e"};
 	std::smatch match;
 	bool valid = std::regex_match(encodedInteger, match, integerRegex);
 	if (!valid) {
