@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "BInteger.h"
+#include "BString.h"
 #include "Encoder.h"
 
 namespace bencoding {
@@ -46,6 +47,24 @@ IntegerWithNegativeValueIsCorrectlyEncoded) {
 	std::shared_ptr<BItem> data(BInteger::create(-13));
 
 	EXPECT_EQ("i-13e", encoder->encode(data));
+}
+
+//
+// String encoding.
+//
+
+TEST_F(EncoderTests,
+EmptyStringIsCorrectlyEncoded) {
+	std::shared_ptr<BItem> data(BString::create(""));
+
+	EXPECT_EQ("0:", encoder->encode(data));
+}
+
+TEST_F(EncoderTests,
+NonemptyStringIsCorrectlyEncoded) {
+	std::shared_ptr<BItem> data(BString::create("test"));
+
+	EXPECT_EQ("4:test", encoder->encode(data));
 }
 
 } // namespace tests

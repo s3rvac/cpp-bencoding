@@ -17,6 +17,7 @@
 namespace bencoding {
 
 class BInteger;
+class BString;
 
 /**
 * @brief Exception thrown when there is an error during the decoding.
@@ -45,10 +46,26 @@ public:
 private:
 	Decoder();
 
+	/// @name Integer Decoding
+	/// @{
+
 	std::unique_ptr<BInteger> decodeInteger(std::istream &input) const;
 	std::string readEncodedInteger(std::istream &input) const;
 	std::unique_ptr<BInteger> decodeEncodedInteger(
 		const std::string &encodedInteger) const;
+
+	/// @}
+
+	/// @name String Decoding
+	/// @{
+
+	std::unique_ptr<BString> decodeString(std::istream &input) const;
+	std::string::size_type readStringLength(std::istream &input) const;
+	void readColon(std::istream &input) const;
+	std::string readStringOfGivenLength(std::istream &input,
+		std::string::size_type length) const;
+
+	/// @}
 };
 
 } // namespace bencoding

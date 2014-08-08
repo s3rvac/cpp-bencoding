@@ -8,6 +8,7 @@
 #include "PrettyPrinter.h"
 
 #include "BInteger.h"
+#include "BString.h"
 
 namespace bencoding {
 
@@ -34,6 +35,10 @@ std::string PrettyPrinter::getPrettyRepr(std::shared_ptr<BItem> data) {
 
 void PrettyPrinter::visit(BInteger *bInteger) {
 	prettyRepr += std::to_string(bInteger->value());
+}
+
+void PrettyPrinter::visit(BString *bString) {
+	prettyRepr += "\"" + bString->value() + "\"";
 }
 
 } // namespace bencoding

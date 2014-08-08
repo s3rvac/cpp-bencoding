@@ -8,6 +8,7 @@
 #include "Encoder.h"
 
 #include "BInteger.h"
+#include "BString.h"
 #include "Utils.h"
 
 namespace bencoding {
@@ -38,6 +39,15 @@ void Encoder::visit(BInteger *bInteger) {
 	// example.
 	std::string encodedInteger("i" + std::to_string(bInteger->value()) + "e");
 	encodedItems.push(encodedInteger);
+}
+
+void Encoder::visit(BString *bString) {
+	// See the description of Decoder::decodeString() for the format and
+	// example.
+	std::string encodedString(
+		std::to_string(bString->length()) + ":" + bString->value()
+	);
+	encodedItems.push(encodedString);
 }
 
 } // namespace bencoding

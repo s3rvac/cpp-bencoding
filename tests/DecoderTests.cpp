@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 
 #include "BInteger.h"
+#include "BString.h"
 #include "Decoder.h"
 #include "TestUtils.h"
 
@@ -125,6 +126,53 @@ DecodeThrowsDecodingErrorWhenDecodingIntegerOfInvalidValue) {
 	EXPECT_THROW(decoder->decode("i1+e"), DecodingError);
 	EXPECT_THROW(decoder->decode("i$e"), DecodingError);
 	EXPECT_THROW(decoder->decode("i1.1e"), DecodingError);
+}
+
+//
+// String decoding.
+//
+
+TEST_F(DecoderTests,
+EmptyStringIsCorrrectlyDecoded) {
+	std::string data("0:");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BString>(bItem);
+	auto bString = bItem->as<BString>();
+	EXPECT_EQ("", bString->value());
+}
+
+TEST_F(DecoderTests,
+NonemptyStringWithSingleCharacterIsCorrrectlyDecoded) {
+	std::string data("1:a");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BString>(bItem);
+	auto bString = bItem->as<BString>();
+	EXPECT_EQ("a", bString->value());
+}
+
+TEST_F(DecoderTests,
+NonemptyStringWithTenCharacterIsCorrrectlyDecoded) {
+	std::string data("10:abcdefghij");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BString>(bItem);
+	auto bString = bItem->as<BString>();
+	EXPECT_EQ("abcdefghij", bString->value());
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenColonIsMissingInString) {
+	EXPECT_THROW(decoder->decode("1a"), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenStringHasNotEnoughCharacters) {
+	EXPECT_THROW(decoder->decode("3:aa"), DecodingError);
 }
 
 //

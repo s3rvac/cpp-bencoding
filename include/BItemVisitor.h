@@ -11,6 +11,7 @@
 namespace bencoding {
 
 class BInteger;
+class BString;
 
 /**
 * @brief Base class for all visitors of the subclasses of BItem.
@@ -24,6 +25,7 @@ public:
 	virtual ~BItemVisitor();
 
 	virtual void visit(BInteger *bInteger) = 0;
+	virtual void visit(BString *bString) = 0;
 
 protected:
 	BItemVisitor();

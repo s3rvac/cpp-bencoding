@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "BInteger.h"
+#include "BString.h"
 #include "PrettyPrinter.h"
 
 namespace bencoding {
@@ -46,6 +47,24 @@ PrettyReprOfIntegerWithNegativeValueIsCorrect) {
 	std::shared_ptr<BItem> data(BInteger::create(-13));
 
 	EXPECT_EQ("-13", printer->getPrettyRepr(data));
+}
+
+//
+// String representation.
+//
+
+TEST_F(PrettyPrinterTests,
+PrettyReprOfEmptyStringIsCorrect) {
+	std::shared_ptr<BItem> data(BString::create(""));
+
+	EXPECT_EQ("\"\"", printer->getPrettyRepr(data));
+}
+
+TEST_F(PrettyPrinterTests,
+PrettyReprOfNonemptyStringIsCorrect) {
+	std::shared_ptr<BItem> data(BString::create("test"));
+
+	EXPECT_EQ("\"test\"", printer->getPrettyRepr(data));
 }
 
 } // namespace tests

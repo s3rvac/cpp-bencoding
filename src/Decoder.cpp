@@ -12,6 +12,7 @@
 #include <sstream>
 
 #include "BInteger.h"
+#include "BString.h"
 #include "Utils.h"
 
 namespace bencoding {
@@ -50,6 +51,17 @@ std::unique_ptr<BItem> Decoder::decode(std::istream &input) {
 	switch (input.peek()) {
 		case 'i':
 			return decodeInteger(input);
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+			return decodeString(input);
 		default:
 			throw DecodingError(std::string("unexpected character: '") +
 				static_cast<char>(input.peek()) + "'");
@@ -113,6 +125,73 @@ std::unique_ptr<BInteger> Decoder::decodeEncodedInteger(
 	BInteger::ValueType integerValue;
 	strToNum(match[1].str(), integerValue);
 	return BInteger::create(integerValue);
+}
+
+/**
+* @brief Decodes a string from @a input.
+*
+* @par Format
+* @code
+* <string length encoded in base ten ASCII>:<string data>
+* @endcode
+*
+* @par Example
+* @code
+* 4:test represents the string "test"
+* @endcode
+*/
+std::unique_ptr<BString> Decoder::decodeString(std::istream &input) const {
+	std::string::size_type stringLength(readStringLength(input));
+	readColon(input);
+	std::string str(readStringOfGivenLength(input, stringLength));
+	return BString::create(str);
+}
+
+/**
+* @brief Reads the string length from @a input, validates it, and returns it.
+*/
+std::string::size_type Decoder::readStringLength(std::istream &input) const {
+	std::string stringLengthInASCII;
+	bool stringLengthInASCIIReadCorrectly = readUpTo(input, stringLengthInASCII, ':');
+	if (!stringLengthInASCIIReadCorrectly) {
+		throw DecodingError("error during the decoding of a string near '" +
+			stringLengthInASCII + "'");
+	}
+
+	std::string::size_type stringLength;
+	bool stringLengthIsValid = strToNum(stringLengthInASCII, stringLength);
+	if (!stringLengthIsValid) {
+		throw DecodingError("invalid string length: '" + stringLengthInASCII + "'");
+	}
+
+	return stringLength;
+}
+
+/**
+* @brief Reads a colon from @a input and discards it.
+*/
+void Decoder::readColon(std::istream &input) const {
+	int c = input.get();
+	if (c != ':') {
+		throw DecodingError("expected a colon (':'), got '" +
+			std::to_string(static_cast<char>(c)) + "'");
+	}
+}
+
+/**
+* @brief Reads a string of the given @a length from @a input and returns it.
+*/
+std::string Decoder::readStringOfGivenLength(std::istream &input,
+		std::string::size_type length) const {
+	std::string str(length, char());
+	input.read(&str[0], length);
+	std::string::size_type numOfReadChars(input.gcount());
+	if (numOfReadChars != length) {
+		throw DecodingError("expected a string containing " + std::to_string(length) +
+			" characters, but read only " + std::to_string(numOfReadChars) +
+			" characters");
+	}
+	return str;
 }
 
 } // namespace bencoding

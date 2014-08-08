@@ -36,6 +36,7 @@ private:
 	/// @name BItemVisitor Interface
 	/// @{
 	virtual void visit(BInteger *bInteger) override;
+	virtual void visit(BString *bString) override;
 	/// @}
 
 private:
