@@ -219,6 +219,17 @@ DecodeFromStreamWorksAsDecodeFromString) {
 }
 
 TEST_F(DecoderTests,
+DecodeForStreamDoesNotReadCharactersPassFirstDecodedItem) {
+	// The second i2e is supposed to be left in the stream.
+	std::istringstream input("i1ei2e");
+	std::shared_ptr<BItem> bItem(decoder->decode(input));
+
+	ASSERT_EQ('i', input.get());
+	ASSERT_EQ('2', input.get());
+	ASSERT_EQ('e', input.get());
+}
+
+TEST_F(DecoderTests,
 DecodeFunctionForStringWorksAsCreatingDecoderAndCallingDecode) {
 	std::string input("i0e");
 	std::shared_ptr<BItem> bItem(decode(input));

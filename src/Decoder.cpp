@@ -49,8 +49,11 @@ std::unique_ptr<BItem> Decoder::decode(const std::string &data) {
 }
 
 /**
-* @brief Reads all the data from the given @a input, decodes them and returns
-*        them.
+* @brief Reads the data from the given @a input, decodes them and returns them.
+*
+* If there are some characters left after the decoding, they are left in @a
+* input, i.e. they are not read. This behavior differs for the overload of
+* decode() that takes @c std::string as the input.
 */
 std::unique_ptr<BItem> Decoder::decode(std::istream &input) {
 	switch (input.peek()) {
