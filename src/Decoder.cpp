@@ -36,7 +36,7 @@ std::unique_ptr<Decoder> Decoder::create() {
 }
 
 /**
-* @brief Decodes the given bencoded data and returns them.
+* @brief Decodes the given bencoded @a data and returns them.
 */
 std::unique_ptr<BItem> Decoder::decode(const std::string &data) {
 	std::istringstream input(data);
