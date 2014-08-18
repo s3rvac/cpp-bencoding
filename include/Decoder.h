@@ -66,6 +66,8 @@ private:
 		std::string::size_type length) const;
 
 	/// @}
+
+	void validateInputDoesNotContainUndecodedCharacters(std::istream &input);
 };
 
 /// @name Decoding Without Explicit Decoder Creation

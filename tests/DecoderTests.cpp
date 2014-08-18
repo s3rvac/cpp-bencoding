@@ -201,6 +201,13 @@ DecodeThrowsDecodingErrorWhenInputBeginsWithUnexpectedSymbol) {
 }
 
 TEST_F(DecoderTests,
+DecodeForStringThrowsDecodingErrorWhenInputIsNotCompletelyRead) {
+	// Only the first i1e should be decoded, thus leaving i2e unread (such an
+	// input is invalid as the integers are not inside of a list).
+	EXPECT_THROW(decoder->decode("i1ei2e"), DecodingError);
+}
+
+TEST_F(DecoderTests,
 DecodeFromStreamWorksAsDecodeFromString) {
 	std::istringstream input("i0e");
 	std::shared_ptr<BItem> bItem(decoder->decode(input));

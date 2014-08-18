@@ -37,10 +37,15 @@ std::unique_ptr<Decoder> Decoder::create() {
 
 /**
 * @brief Decodes the given bencoded @a data and returns them.
+*
+* If there are some characters left after the decoded data, this function
+* throws DecodingError.
 */
 std::unique_ptr<BItem> Decoder::decode(const std::string &data) {
 	std::istringstream input(data);
-	return decode(input);
+	auto decodedData = decode(input);
+	validateInputDoesNotContainUndecodedCharacters(input);
+	return decodedData;
 }
 
 /**
@@ -192,6 +197,15 @@ std::string Decoder::readStringOfGivenLength(std::istream &input,
 			" characters");
 	}
 	return str;
+}
+
+/**
+* @brief Throws DecodingError if @a input has not been completely read.
+*/
+void Decoder::validateInputDoesNotContainUndecodedCharacters(std::istream &input) {
+	if (input.peek() != std::char_traits<char>::eof()) {
+		throw DecodingError("input contains undecoded characters");
+	}
 }
 
 /**
