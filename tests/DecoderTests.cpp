@@ -211,5 +211,27 @@ DecodeFromStreamWorksAsDecodeFromString) {
 	EXPECT_EQ(0, bInteger->value());
 }
 
+TEST_F(DecoderTests,
+DecodeFunctionForStringWorksAsCreatingDecoderAndCallingDecode) {
+	std::string input("i0e");
+	std::shared_ptr<BItem> bItem(decode(input));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BInteger>(bItem);
+	auto bInteger = bItem->as<BInteger>();
+	EXPECT_EQ(0, bInteger->value());
+}
+
+TEST_F(DecoderTests,
+DecodeFunctionForStreamWorksAsCreatingDecoderAndCallingDecode) {
+	std::istringstream input("i0e");
+	std::shared_ptr<BItem> bItem(decode(input));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BInteger>(bItem);
+	auto bInteger = bItem->as<BInteger>();
+	EXPECT_EQ(0, bInteger->value());
+}
+
 } // namespace tests
 } // namespace bencoding

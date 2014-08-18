@@ -68,6 +68,14 @@ private:
 	/// @}
 };
 
+/// @name Decoding Without Explicit Decoder Creation
+/// @{
+
+std::unique_ptr<BItem> decode(const std::string &data);
+std::unique_ptr<BItem> decode(std::istream &input);
+
+/// @}
+
 } // namespace bencoding
 
 #endif

@@ -194,4 +194,31 @@ std::string Decoder::readStringOfGivenLength(std::istream &input,
 	return str;
 }
 
+/**
+* @brief Decodes the given bencoded @a data and returns them.
+*
+* This function can be handy if you just want to decode bencoded data without
+* explicitly creating a decoder a calling @c decode() on it.
+*
+* See Decoder::decode() for more details.
+*/
+std::unique_ptr<BItem> decode(const std::string &data) {
+	auto decoder = Decoder::create();
+	return decoder->decode(data);
+}
+
+/**
+* @brief Reads all the data from the given @a input, decodes them and returns
+*        them.
+*
+* This function can be handy if you just want to decode bencoded data without
+* explicitly creating a decoder a calling @c decode() on it.
+*
+* See Decoder::decode() for more details.
+*/
+std::unique_ptr<BItem> decode(std::istream &input) {
+	auto decoder = Decoder::create();
+	return decoder->decode(input);
+}
+
 } // namespace bencoding
