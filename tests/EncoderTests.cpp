@@ -67,5 +67,16 @@ NonemptyStringIsCorrectlyEncoded) {
 	EXPECT_EQ("4:test", encoder->encode(data));
 }
 
+//
+// Other.
+//
+
+TEST_F(EncoderTests,
+EncodeFunctionWorksAsCreatingEncoderAndCallingEncode) {
+	std::shared_ptr<BItem> data(BInteger::create(0));
+
+	EXPECT_EQ("i0e", encode(data));
+}
+
 } // namespace tests
 } // namespace bencoding
