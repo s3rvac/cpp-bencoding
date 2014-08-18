@@ -9,7 +9,6 @@
 #define BENCODING_ENCODER_H
 
 #include <memory>
-#include <stack>
 #include <string>
 
 #include "BItemVisitor.h"
@@ -43,8 +42,8 @@ private:
 	/// @}
 
 private:
-	/// Stack of encoded items.
-	std::stack<std::string> encodedItems;
+	/// Encoded items.
+	std::string encodedData;
 };
 
 } // namespace bencoding

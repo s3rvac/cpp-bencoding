@@ -29,16 +29,15 @@ std::unique_ptr<Encoder> Encoder::create() {
 * @brief Encodes the given @a data and returns them.
 */
 std::string Encoder::encode(std::shared_ptr<BItem> data) {
-	clear(encodedItems);
 	data->accept(this);
-	return encodedItems.top();
+	return encodedData;
 }
 
 void Encoder::visit(BInteger *bInteger) {
 	// See the description of Decoder::decodeInteger() for the format and
 	// example.
 	std::string encodedInteger("i" + std::to_string(bInteger->value()) + "e");
-	encodedItems.push(encodedInteger);
+	encodedData += encodedInteger;
 }
 
 void Encoder::visit(BString *bString) {
@@ -47,7 +46,7 @@ void Encoder::visit(BString *bString) {
 	std::string encodedString(
 		std::to_string(bString->length()) + ":" + bString->value()
 	);
-	encodedItems.push(encodedString);
+	encodedData += encodedString;
 }
 
 } // namespace bencoding
