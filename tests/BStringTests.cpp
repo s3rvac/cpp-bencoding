@@ -18,24 +18,24 @@ class BStringTests: public Test {};
 
 TEST_F(BStringTests,
 ValueReturnsCorrectValueAfterCreation) {
-	auto i = BString::create("test");
+	auto s = BString::create("test");
 
-	EXPECT_EQ("test", i->value());
+	EXPECT_EQ("test", s->value());
 }
 
 TEST_F(BStringTests,
 ValueReturnsCorrectValueAfterSet) {
-	auto i = BString::create("test");
-	i->setValue("other");
+	auto s = BString::create("test");
+	s->setValue("other");
 
-	EXPECT_EQ("other", i->value());
+	EXPECT_EQ("other", s->value());
 }
 
 TEST_F(BStringTests,
 LengthReturnsCorrectValue) {
-	auto i = BString::create("test");
+	auto s = BString::create("test");
 
-	EXPECT_EQ(4, i->length());
+	EXPECT_EQ(4, s->length());
 }
 
 } // namespace tests
