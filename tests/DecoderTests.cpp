@@ -248,8 +248,18 @@ DecodeThrowsDecodingErrorWhenInputIsEmpty) {
 }
 
 TEST_F(DecoderTests,
-DecodeThrowsDecodingErrorWhenInputIsAtEnd) {
-	std::istringstream input("");
+DecodeThrowsDecodingErrorWhenInputIsAtEOF) {
+	std::istringstream input;
+	putIntoEOFState(input);
+
+	EXPECT_THROW(decoder->decode(input), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenInputIsInError) {
+	std::istringstream input;
+	putIntoErrorState(input);
+
 	EXPECT_THROW(decoder->decode(input), DecodingError);
 }
 
