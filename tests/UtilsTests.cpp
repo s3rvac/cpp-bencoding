@@ -154,7 +154,7 @@ ReadUpToStoresReadCharsEvenWhenSentinelIsNotFound) {
 }
 
 TEST_F(UtilsTests,
-ReadUpToReturnsFalseWhenInputIsInErrorState) {
+ReadUpToReturnsFalseWhenInputIsInError) {
 	std::istringstream input("abcd$");
 	std::string readData;
 
@@ -163,7 +163,7 @@ ReadUpToReturnsFalseWhenInputIsInErrorState) {
 }
 
 TEST_F(UtilsTests,
-ReadUpToDoesNotReadAnyDataWhenInputIsInErrorState) {
+ReadUpToDoesNotReadAnyDataWhenInputIsInError) {
 	std::istringstream input("abc$");
 	std::string readData;
 
@@ -173,7 +173,7 @@ ReadUpToDoesNotReadAnyDataWhenInputIsInErrorState) {
 }
 
 TEST_F(UtilsTests,
-ReadUpToReturnsFalseWhenInputIsInEOFState) {
+ReadUpToReturnsFalseWhenInputIsAtEOF) {
 	std::istringstream input("abcd$");
 	std::string readData;
 
@@ -182,7 +182,7 @@ ReadUpToReturnsFalseWhenInputIsInEOFState) {
 }
 
 TEST_F(UtilsTests,
-ReadUpToDoesNotReadAnyDataWhenInputIsInEOFState) {
+ReadUpToDoesNotReadAnyDataWhenInputIsAtEOF) {
 	std::istringstream input("abcd$");
 	std::string readData;
 
@@ -224,7 +224,7 @@ ReadUntilStoresReadCharsEvenWhenLastIsNotFound) {
 }
 
 TEST_F(UtilsTests,
-ReadUntilDoesNotReadAnyDataWhenInputIsInErrorState) {
+ReadUntilDoesNotReadAnyDataWhenInputIsInError) {
 	std::istringstream input("abcd$");
 	std::string readData;
 
@@ -234,7 +234,7 @@ ReadUntilDoesNotReadAnyDataWhenInputIsInErrorState) {
 }
 
 TEST_F(UtilsTests,
-ReadUntilReturnsFalseWhenInputIsInEOFState) {
+ReadUntilReturnsFalseWhenInputIsAtEOF) {
 	std::istringstream input("abc$");
 	std::string readData;
 
@@ -243,7 +243,7 @@ ReadUntilReturnsFalseWhenInputIsInEOFState) {
 }
 
 TEST_F(UtilsTests,
-ReadUntilDoesNotReadAnyDataWhenInputIsInEOFState) {
+ReadUntilDoesNotReadAnyDataWhenInputIsAtEOF) {
 	std::istringstream input("abcd$");
 	std::string readData;
 
