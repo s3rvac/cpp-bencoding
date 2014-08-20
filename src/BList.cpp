@@ -42,12 +42,12 @@ bool BList::empty() const {
 }
 
 /**
-* @brief Appends the given item at the end of the list.
+* @brief Appends the given item to the end of the list.
 *
 * @par Preconditions
 *  - @a bItem is non-null
 */
-void BList::append(std::shared_ptr<BItem> bItem) {
+void BList::push_back(std::shared_ptr<BItem> bItem) {
 	assert(bItem && "cannot add a null item to the list");
 
 	itemList.push_back(bItem);

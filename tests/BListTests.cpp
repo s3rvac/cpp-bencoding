@@ -27,7 +27,7 @@ ListIsEmptyAfterCreation) {
 TEST_F(BListTests,
 ListIsNotEmptyAfterItemIsAppendedToEmptyList) {
 	auto l = BList::create();
-	l->append(BInteger::create(1));
+	l->push_back(BInteger::create(1));
 
 	EXPECT_FALSE(l->empty());
 }
@@ -37,9 +37,9 @@ SizeCorrespondsToNumberOfItemsInList) {
 	auto l = BList::create();
 
 	ASSERT_EQ(0, l->size());
-	l->append(BInteger::create(1));
+	l->push_back(BInteger::create(1));
 	ASSERT_EQ(1, l->size());
-	l->append(BInteger::create(1));
+	l->push_back(BInteger::create(1));
 	ASSERT_EQ(2, l->size());
 }
 
@@ -47,9 +47,9 @@ TEST_F(BListTests,
 FrontReturnsFirstItemFromNonEmptyList) {
 	auto l = BList::create();
 	std::shared_ptr<BItem> firstItem = BInteger::create(1);
-	l->append(firstItem);
+	l->push_back(firstItem);
 	std::shared_ptr<BItem> secondItem = BInteger::create(2);
-	l->append(secondItem);
+	l->push_back(secondItem);
 
 	EXPECT_EQ(firstItem, l->front());
 }
@@ -58,9 +58,9 @@ TEST_F(BListTests,
 FrontReturnsFirstItemFromNonEmptyConstantList) {
 	auto l = BList::create();
 	std::shared_ptr<BItem> firstItem = BInteger::create(1);
-	l->append(firstItem);
+	l->push_back(firstItem);
 	std::shared_ptr<BItem> secondItem = BInteger::create(2);
-	l->append(secondItem);
+	l->push_back(secondItem);
 	std::shared_ptr<const BList> cl(std::move(l));
 
 	EXPECT_EQ(firstItem, cl->front());
@@ -70,9 +70,9 @@ TEST_F(BListTests,
 BackReturnsLastItemFromNonEmptyList) {
 	auto l = BList::create();
 	std::shared_ptr<BItem> firstItem = BInteger::create(1);
-	l->append(firstItem);
+	l->push_back(firstItem);
 	std::shared_ptr<BItem> secondItem = BInteger::create(2);
-	l->append(secondItem);
+	l->push_back(secondItem);
 
 	EXPECT_EQ(secondItem, l->back());
 }
@@ -81,9 +81,9 @@ TEST_F(BListTests,
 BackReturnsLastItemFromNonEmptyConstantList) {
 	auto l = BList::create();
 	std::shared_ptr<BItem> firstItem = BInteger::create(1);
-	l->append(firstItem);
+	l->push_back(firstItem);
 	std::shared_ptr<BItem> secondItem = BInteger::create(2);
-	l->append(secondItem);
+	l->push_back(secondItem);
 	std::shared_ptr<const BList> cl(std::move(l));
 
 	EXPECT_EQ(secondItem, cl->back());
@@ -99,8 +99,8 @@ IterationWorksCorrectlyOverEmptyList) {
 TEST_F(BListTests,
 IterationWorksCorrectlyOverListWithTwoItems) {
 	auto l = BList::create();
-	l->append(BInteger::create(1));
-	l->append(BInteger::create(2));
+	l->push_back(BInteger::create(1));
+	l->push_back(BInteger::create(2));
 
 	auto i = l->begin();
 	auto firstItem = (*i)->as<BInteger>();
@@ -126,8 +126,8 @@ IterationWorksCorrectlyOverEmptyConstantList) {
 TEST_F(BListTests,
 IterationWorksCorrectlyOverConstantListWithTwoItems) {
 	auto l = BList::create();
-	l->append(BInteger::create(1));
-	l->append(BInteger::create(2));
+	l->push_back(BInteger::create(1));
+	l->push_back(BInteger::create(2));
 	std::shared_ptr<const BList> cl(std::move(l));
 
 	auto i = cl->begin();
@@ -154,8 +154,8 @@ IterationWorksCorrectlyOverEmptyConstantListUsingCPrefixedMethods) {
 TEST_F(BListTests,
 IterationWorksCorrectlyOverConstantListWithTwoItemsUsingCPrefixedMethods) {
 	auto l = BList::create();
-	l->append(BInteger::create(1));
-	l->append(BInteger::create(2));
+	l->push_back(BInteger::create(1));
+	l->push_back(BInteger::create(2));
 	std::shared_ptr<const BList> cl(std::move(l));
 
 	auto i = cl->cbegin();

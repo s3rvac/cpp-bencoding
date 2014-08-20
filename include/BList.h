@@ -18,6 +18,8 @@ namespace bencoding {
 /**
 * @brief Representation of a list.
 *
+* The interface models the interface of @c std::list.
+*
 * Use create() to create instances of the class.
 */
 class BList: public BItem {
@@ -55,7 +57,7 @@ public:
 
 	/// @name Modifiers
 	/// @{
-	void append(std::shared_ptr<BItem> bItem);
+	void push_back(std::shared_ptr<BItem> bItem);
 	/// @}
 
 	/// @name Element Access

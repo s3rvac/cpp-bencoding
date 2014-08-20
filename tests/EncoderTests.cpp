@@ -64,8 +64,8 @@ EmptyListIsEncodedCorrectly) {
 TEST_F(EncoderTests,
 ListContainingTwoStringsIsEncodedCorrectly) {
 	std::shared_ptr<BList> bList = BList::create();
-	bList->append(BString::create("test"));
-	bList->append(BString::create("hello"));
+	bList->push_back(BString::create("test"));
+	bList->push_back(BString::create("hello"));
 
 	EXPECT_EQ("l4:test5:helloe", encoder->encode(bList));
 }

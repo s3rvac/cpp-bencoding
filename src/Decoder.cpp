@@ -176,7 +176,7 @@ std::unique_ptr<BList> Decoder::decodeList(std::istream &input) {
 std::unique_ptr<BList> Decoder::decodeListItemsIntoList(std::istream &input) {
 	auto bList = BList::create();
 	while (input && input.peek() != 'e') {
-		bList->append(decode(input));
+		bList->push_back(decode(input));
 	}
 	return bList;
 }
