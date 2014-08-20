@@ -58,4 +58,21 @@ bool readUntil(std::istream &stream, std::string &readData, char last) {
 	return false;
 }
 
+/**
+* @brief Replaces all occurrences of @a what with @a withWhat in @a str and
+*        returns the resulting string.
+*/
+std::string replace(const std::string &str, char what,
+		const std::string &withWhat) {
+	std::string result;
+	for (auto c : str) {
+		if (c == what) {
+			result += withWhat;
+		} else {
+			result += c;
+		}
+	}
+	return result;
+}
+
 } // namespace bencoding

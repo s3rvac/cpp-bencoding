@@ -97,6 +97,14 @@ void clear(std::stack<ItemType> &stack) {
 
 /// @}
 
+/// @name String Operations
+/// @{
+
+std::string replace(const std::string &str, char what,
+	const std::string &withWhat);
+
+/// @}
+
 } // namespace bencoding
 
 #endif

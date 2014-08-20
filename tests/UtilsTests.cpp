@@ -225,5 +225,39 @@ ClearOnStackClearsIt) {
 	scenarioClearEmptiesContainer(s);
 }
 
+//
+// replace()
+//
+
+TEST_F(UtilsTests,
+ReplaceDoesNotPerformAnyReplacementWhenStringIsEmpty) {
+	EXPECT_EQ("", replace("", 'x', "X"));
+}
+
+TEST_F(UtilsTests,
+ReplaceDoesNotPerformAnyReplacementWhenCharDoesNotAppearInString) {
+	EXPECT_EQ("abcd", replace("abcd", 'x', "X"));
+}
+
+TEST_F(UtilsTests,
+ReplaceCorrectlyReplacesCharInStringIfItOccursOnce) {
+	EXPECT_EQ("Abcd", replace("abcd", 'a', "A"));
+}
+
+TEST_F(UtilsTests,
+ReplaceCorrectlyReplacesCharInStringIfItOccursTwice) {
+	EXPECT_EQ("AbcA", replace("abca", 'a', "A"));
+}
+
+TEST_F(UtilsTests,
+ReplaceCorrectlyReplacesCharInStringWhenWithWhatIsLongerThanOneChar) {
+	EXPECT_EQ("XXXXbcXXXX", replace("abca", 'a', "XXXX"));
+}
+
+TEST_F(UtilsTests,
+ReplaceDeletesCharsInStringWhenWithWhatIsEmpty) {
+	EXPECT_EQ("bc", replace("abca", 'a', ""));
+}
+
 } // namespace tests
 } // namespace bencoding
