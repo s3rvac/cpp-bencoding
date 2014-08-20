@@ -5,6 +5,9 @@
 * @brief     Test utilities.
 */
 
+#ifndef BENCODING_TEST_UTILS_H
+#define BENCODING_TEST_UTILS_H
+
 #include <istream>
 #include <string>
 
@@ -27,3 +30,5 @@ void putIntoErrorState(std::istream &stream);
 void putIntoEOFState(std::istream &stream);
 
 } // namespace bencoding
+
+#endif
