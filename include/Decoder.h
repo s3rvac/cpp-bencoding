@@ -51,30 +51,24 @@ private:
 
 	/// @name Integer Decoding
 	/// @{
-
 	std::unique_ptr<BInteger> decodeInteger(std::istream &input) const;
 	std::string readEncodedInteger(std::istream &input) const;
 	std::unique_ptr<BInteger> decodeEncodedInteger(
 		const std::string &encodedInteger) const;
-
 	/// @}
 
 	/// @name List Decoding
 	/// @{
-
 	std::unique_ptr<BList> decodeList(std::istream &input);
 	std::unique_ptr<BList> decodeListItemsIntoList(std::istream &input);
-
 	/// @}
 
 	/// @name String Decoding
 	/// @{
-
 	std::unique_ptr<BString> decodeString(std::istream &input) const;
 	std::string::size_type readStringLength(std::istream &input) const;
 	std::string readStringOfGivenLength(std::istream &input,
 		std::string::size_type length) const;
-
 	/// @}
 
 	void validateInputDoesNotContainUndecodedCharacters(std::istream &input);
@@ -82,10 +76,8 @@ private:
 
 /// @name Decoding Without Explicit Decoder Creation
 /// @{
-
 std::unique_ptr<BItem> decode(const std::string &data);
 std::unique_ptr<BItem> decode(std::istream &input);
-
 /// @}
 
 } // namespace bencoding

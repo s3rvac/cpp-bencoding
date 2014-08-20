@@ -49,9 +49,7 @@ private:
 
 /// @name Encoding Without Explicit Encoder Creation
 /// @{
-
 std::string encode(std::shared_ptr<BItem> data);
-
 /// @}
 
 } // namespace bencoding
