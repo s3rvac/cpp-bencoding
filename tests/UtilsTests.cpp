@@ -153,6 +153,44 @@ ReadUpToStoresReadCharsEvenWhenSentinelIsNotFound) {
 	EXPECT_EQ("abcd", readData);
 }
 
+TEST_F(UtilsTests,
+ReadUpToReturnsFalseWhenInputIsInErrorState) {
+	std::istringstream input("abcd$");
+	std::string readData;
+
+	putIntoErrorState(input);
+	EXPECT_FALSE(readUpTo(input, readData, '$'));
+}
+
+TEST_F(UtilsTests,
+ReadUpToDoesNotReadAnyDataWhenInputIsInErrorState) {
+	std::istringstream input("abc$");
+	std::string readData;
+
+	putIntoErrorState(input);
+	readUpTo(input, readData, '$');
+	EXPECT_EQ("", readData);
+}
+
+TEST_F(UtilsTests,
+ReadUpToReturnsFalseWhenInputIsInEOFState) {
+	std::istringstream input("abcd$");
+	std::string readData;
+
+	putIntoEOFState(input);
+	EXPECT_FALSE(readUpTo(input, readData, '$'));
+}
+
+TEST_F(UtilsTests,
+ReadUpToDoesNotReadAnyDataWhenInputIsInEOFState) {
+	std::istringstream input("abcd$");
+	std::string readData;
+
+	putIntoEOFState(input);
+	readUpTo(input, readData, '$');
+	EXPECT_EQ("", readData);
+}
+
 //
 // readUntil()
 //
@@ -183,6 +221,35 @@ ReadUntilStoresReadCharsEvenWhenLastIsNotFound) {
 
 	readUntil(input, readData, '$');
 	EXPECT_EQ("abcd", readData);
+}
+
+TEST_F(UtilsTests,
+ReadUntilDoesNotReadAnyDataWhenInputIsInErrorState) {
+	std::istringstream input("abcd$");
+	std::string readData;
+
+	putIntoErrorState(input);
+	readUntil(input, readData, '$');
+	EXPECT_EQ("", readData);
+}
+
+TEST_F(UtilsTests,
+ReadUntilReturnsFalseWhenInputIsInEOFState) {
+	std::istringstream input("abc$");
+	std::string readData;
+
+	putIntoEOFState(input);
+	EXPECT_FALSE(readUntil(input, readData, '$'));
+}
+
+TEST_F(UtilsTests,
+ReadUntilDoesNotReadAnyDataWhenInputIsInEOFState) {
+	std::istringstream input("abcd$");
+	std::string readData;
+
+	putIntoEOFState(input);
+	readUntil(input, readData, '$');
+	EXPECT_EQ("", readData);
 }
 
 //
