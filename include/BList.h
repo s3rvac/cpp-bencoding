@@ -58,6 +58,7 @@ public:
 	/// @name Modifiers
 	/// @{
 	void push_back(std::shared_ptr<BItem> bItem);
+	void pop_back();
 	/// @}
 
 	/// @name Element Access

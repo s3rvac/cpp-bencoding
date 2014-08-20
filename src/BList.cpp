@@ -54,6 +54,20 @@ void BList::push_back(std::shared_ptr<BItem> bItem) {
 }
 
 /**
+* @brief Removes the last element of the list.
+*
+* References and iterators to the erased element are invalidated.
+*
+* @preconditions
+*  - list is non-empty
+*/
+void BList::pop_back() {
+	assert(!empty() && "cannot call pop_back() on an empty list");
+
+	itemList.pop_back();
+}
+
+/**
 * @brief Returns a reference to the first item in the list.
 *
 * @preconditions

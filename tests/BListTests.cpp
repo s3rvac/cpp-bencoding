@@ -44,6 +44,20 @@ SizeCorrespondsToNumberOfItemsInList) {
 }
 
 TEST_F(BListTests,
+PopBackCorrectlyRemovesLastItemInNonEmptyList) {
+	auto l = BList::create();
+	std::shared_ptr<BItem> firstItem = BInteger::create(1);
+	l->push_back(firstItem);
+	std::shared_ptr<BItem> secondItem = BInteger::create(2);
+	l->push_back(secondItem);
+
+	ASSERT_EQ(2, l->size());
+	l->pop_back();
+	ASSERT_EQ(1, l->size());
+	EXPECT_EQ(firstItem, l->front());
+}
+
+TEST_F(BListTests,
 FrontReturnsFirstItemFromNonEmptyList) {
 	auto l = BList::create();
 	std::shared_ptr<BItem> firstItem = BInteger::create(1);
