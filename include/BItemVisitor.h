@@ -11,6 +11,7 @@
 namespace bencoding {
 
 class BInteger;
+class BList;
 class BString;
 
 /**
@@ -25,6 +26,7 @@ public:
 	virtual ~BItemVisitor();
 
 	virtual void visit(BInteger *bInteger) = 0;
+	virtual void visit(BList *blist) = 0;
 	virtual void visit(BString *bString) = 0;
 
 protected:

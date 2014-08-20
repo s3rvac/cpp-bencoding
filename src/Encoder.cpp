@@ -8,6 +8,7 @@
 #include "Encoder.h"
 
 #include "BInteger.h"
+#include "BList.h"
 #include "BString.h"
 #include "Utils.h"
 
@@ -38,6 +39,15 @@ void Encoder::visit(BInteger *bInteger) {
 	// example.
 	std::string encodedInteger("i" + std::to_string(bInteger->value()) + "e");
 	encodedData += encodedInteger;
+}
+
+void Encoder::visit(BList *bList) {
+	// See the description of Decoder::decodeList() for the format and example.
+	encodedData += "l";
+	for (auto bItem : *bList) {
+		bItem->accept(this);
+	}
+	encodedData += "e";
 }
 
 void Encoder::visit(BString *bString) {

@@ -11,6 +11,7 @@
 #include <gtest/gtest.h>
 
 #include "BInteger.h"
+#include "BList.h"
 #include "BString.h"
 #include "Decoder.h"
 #include "TestUtils.h"
@@ -126,6 +127,68 @@ DecodeThrowsDecodingErrorWhenDecodingIntegerOfInvalidValue) {
 	EXPECT_THROW(decoder->decode("i1+e"), DecodingError);
 	EXPECT_THROW(decoder->decode("i$e"), DecodingError);
 	EXPECT_THROW(decoder->decode("i1.1e"), DecodingError);
+}
+
+//
+// List decoding.
+//
+
+TEST_F(DecoderTests,
+EmptyListIsCorrectlyDecoded) {
+	std::string data("le");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BList>(bItem);
+	auto bList = bItem->as<BList>();
+	EXPECT_TRUE(bList->empty());
+}
+
+TEST_F(DecoderTests,
+ListWithSingleIntegerIsDecodedCorrectly) {
+	std::string data("li1ee");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BList>(bItem);
+	auto bList = bItem->as<BList>();
+	ASSERT_EQ(1, bList->size());
+	auto firstItem = bList->front();
+	assertDecodedAs<BInteger>(firstItem);
+	auto firstItemAsInteger = firstItem->as<BInteger>();
+	EXPECT_EQ(1, firstItemAsInteger->value());
+}
+
+TEST_F(DecoderTests,
+ListWithTwoStringsIsDecodedCorrectly) {
+	std::string data("l4:test5:helloe");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BList>(bItem);
+	auto bList = bItem->as<BList>();
+	ASSERT_EQ(2, bList->size());
+	// "test"
+	auto firstItem = bList->front();
+	assertDecodedAs<BString>(firstItem);
+	auto firstItemAsString = firstItem->as<BString>();
+	EXPECT_EQ("test", firstItemAsString->value());
+	// "hello"
+	auto secondItem = bList->back();
+	assertDecodedAs<BString>(secondItem);
+	auto secondItemAsString = secondItem->as<BString>();
+	EXPECT_EQ("hello", secondItemAsString->value());
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenCharEIsMissingFromEndOfList) {
+	EXPECT_THROW(decoder->decode("li1e"), DecodingError);
+	EXPECT_THROW(decoder->decode("l4:test"), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenListItemIsInvalidIsMissingFromEndOfList) {
+	EXPECT_THROW(decoder->decode("l$e"), DecodingError);
 }
 
 //

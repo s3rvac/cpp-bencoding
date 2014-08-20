@@ -8,6 +8,7 @@
 #include "PrettyPrinter.h"
 
 #include "BInteger.h"
+#include "BList.h"
 #include "BString.h"
 
 namespace bencoding {
@@ -35,6 +36,19 @@ std::string PrettyPrinter::getPrettyRepr(std::shared_ptr<BItem> data) {
 
 void PrettyPrinter::visit(BInteger *bInteger) {
 	prettyRepr += std::to_string(bInteger->value());
+}
+
+void PrettyPrinter::visit(BList *bList) {
+	prettyRepr += "[";
+	bool putComma = false;
+	for (auto bItem : *bList) {
+		if (putComma) {
+			prettyRepr += ", ";
+		}
+		bItem->accept(this);
+		putComma = true;
+	}
+	prettyRepr += "]";
 }
 
 void PrettyPrinter::visit(BString *bString) {

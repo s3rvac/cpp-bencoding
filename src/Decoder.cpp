@@ -12,6 +12,7 @@
 #include <sstream>
 
 #include "BInteger.h"
+#include "BList.h"
 #include "BString.h"
 #include "Utils.h"
 
@@ -59,6 +60,8 @@ std::unique_ptr<BItem> Decoder::decode(std::istream &input) {
 	switch (input.peek()) {
 		case 'i':
 			return decodeInteger(input);
+		case 'l':
+			return decodeList(input);
 		case '0':
 		case '1':
 		case '2':
@@ -144,6 +147,38 @@ std::unique_ptr<BInteger> Decoder::decodeEncodedInteger(
 	BInteger::ValueType integerValue;
 	strToNum(match[1].str(), integerValue);
 	return BInteger::create(integerValue);
+}
+
+/**
+* @brief Decodes a list from @a input.
+*
+* @par Format
+* @code
+* l<bencoded values>e
+* @endcode
+*
+* @par Example
+* @code
+* l4:spam4:eggse represents a list containing two strings "spam" and "eggs"
+* @endcode
+*/
+std::unique_ptr<BList> Decoder::decodeList(std::istream &input) {
+	readExpectedChar(input, 'l');
+	auto bList = decodeListItemsIntoList(input);
+	readExpectedChar(input, 'e');
+	return bList;
+}
+
+/**
+* @brief Decodes items from @a input, appends them to a list, and returns that
+*        list.
+*/
+std::unique_ptr<BList> Decoder::decodeListItemsIntoList(std::istream &input) {
+	auto bList = BList::create();
+	while (input && input.peek() != 'e') {
+		bList->append(decode(input));
+	}
+	return bList;
 }
 
 /**

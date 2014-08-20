@@ -17,6 +17,7 @@
 namespace bencoding {
 
 class BInteger;
+class BList;
 class BString;
 
 /**
@@ -55,6 +56,14 @@ private:
 	std::string readEncodedInteger(std::istream &input) const;
 	std::unique_ptr<BInteger> decodeEncodedInteger(
 		const std::string &encodedInteger) const;
+
+	/// @}
+
+	/// @name List Decoding
+	/// @{
+
+	std::unique_ptr<BList> decodeList(std::istream &input);
+	std::unique_ptr<BList> decodeListItemsIntoList(std::istream &input);
 
 	/// @}
 

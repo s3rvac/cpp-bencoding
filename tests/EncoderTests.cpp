@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "BInteger.h"
+#include "BList.h"
 #include "BString.h"
 #include "Encoder.h"
 
@@ -47,6 +48,26 @@ IntegerWithNegativeValueIsCorrectlyEncoded) {
 	std::shared_ptr<BItem> data(BInteger::create(-13));
 
 	EXPECT_EQ("i-13e", encoder->encode(data));
+}
+
+//
+// List encoding.
+//
+
+TEST_F(EncoderTests,
+EmptyListIsEncodedCorrectly) {
+	std::shared_ptr<BList> bList = BList::create();
+
+	EXPECT_EQ("le", encoder->encode(bList));
+}
+
+TEST_F(EncoderTests,
+ListContainingTwoStringsIsEncodedCorrectly) {
+	std::shared_ptr<BList> bList = BList::create();
+	bList->append(BString::create("test"));
+	bList->append(BString::create("hello"));
+
+	EXPECT_EQ("l4:test5:helloe", encoder->encode(bList));
 }
 
 //

@@ -8,6 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "BInteger.h"
+#include "BList.h"
 #include "BString.h"
 #include "PrettyPrinter.h"
 
@@ -47,6 +48,26 @@ PrettyReprOfIntegerWithNegativeValueIsCorrect) {
 	std::shared_ptr<BItem> data(BInteger::create(-13));
 
 	EXPECT_EQ("-13", printer->getPrettyRepr(data));
+}
+
+//
+// List representation.
+//
+
+TEST_F(PrettyPrinterTests,
+PrettyReprOfEmptyListIsCorrect) {
+	std::shared_ptr<BList> bList(BList::create());
+
+	EXPECT_EQ("[]", printer->getPrettyRepr(bList));
+}
+
+TEST_F(PrettyPrinterTests,
+PrettyReprOfListWithTwoStringsIsCorrect) {
+	std::shared_ptr<BList> bList = BList::create();
+	bList->append(BString::create("test"));
+	bList->append(BString::create("hello"));
+
+	EXPECT_EQ("[\"test\", \"hello\"]", printer->getPrettyRepr(bList));
 }
 
 //
