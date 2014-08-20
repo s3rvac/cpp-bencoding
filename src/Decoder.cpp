@@ -80,6 +80,17 @@ std::unique_ptr<BItem> Decoder::decode(std::istream &input) {
 }
 
 /**
+* @brief Reads @a expected_char from @a input and discards it.
+*/
+void Decoder::readExpectedChar(std::istream &input, char expected_char) const {
+	int c = input.get();
+	if (c != expected_char) {
+		throw DecodingError(std::string("expected '") + expected_char +
+			"', got '" + static_cast<char>(c) + "'");
+	}
+}
+
+/**
 * @brief Decodes an integer from @a input.
 *
 * @par Format
@@ -150,7 +161,7 @@ std::unique_ptr<BInteger> Decoder::decodeEncodedInteger(
 */
 std::unique_ptr<BString> Decoder::decodeString(std::istream &input) const {
 	std::string::size_type stringLength(readStringLength(input));
-	readColon(input);
+	readExpectedChar(input, ':');
 	std::string str(readStringOfGivenLength(input, stringLength));
 	return BString::create(str);
 }
@@ -173,17 +184,6 @@ std::string::size_type Decoder::readStringLength(std::istream &input) const {
 	}
 
 	return stringLength;
-}
-
-/**
-* @brief Reads a colon from @a input and discards it.
-*/
-void Decoder::readColon(std::istream &input) const {
-	int c = input.get();
-	if (c != ':') {
-		throw DecodingError("expected a colon (':'), got '" +
-			std::to_string(static_cast<char>(c)) + "'");
-	}
 }
 
 /**

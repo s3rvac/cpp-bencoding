@@ -46,6 +46,8 @@ public:
 private:
 	Decoder();
 
+	void readExpectedChar(std::istream &input, char expected_char) const;
+
 	/// @name Integer Decoding
 	/// @{
 
@@ -61,7 +63,6 @@ private:
 
 	std::unique_ptr<BString> decodeString(std::istream &input) const;
 	std::string::size_type readStringLength(std::istream &input) const;
-	void readColon(std::istream &input) const;
 	std::string readStringOfGivenLength(std::istream &input,
 		std::string::size_type length) const;
 
