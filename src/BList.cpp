@@ -44,7 +44,7 @@ bool BList::empty() const {
 /**
 * @brief Appends the given item to the end of the list.
 *
-* @par Preconditions
+* @preconditions
 *  - @a bItem is non-null
 */
 void BList::push_back(std::shared_ptr<BItem> bItem) {
@@ -56,7 +56,7 @@ void BList::push_back(std::shared_ptr<BItem> bItem) {
 /**
 * @brief Returns a reference to the first item in the list.
 *
-* @par Preconditions
+* @preconditions
 *  - list is non-empty
 */
 BList::reference BList::front() {
@@ -68,7 +68,7 @@ BList::reference BList::front() {
 /**
 * @brief Returns a constant reference to the first item in the list.
 *
-* @par Preconditions
+* @preconditions
 *  - list is non-empty
 */
 BList::const_reference BList::front() const {
@@ -80,7 +80,7 @@ BList::const_reference BList::front() const {
 /**
 * @brief Returns a reference to the last item in the list.
 *
-* @par Preconditions
+* @preconditions
 *  - list is non-empty
 */
 BList::reference BList::back() {
@@ -92,7 +92,7 @@ BList::reference BList::back() {
 /**
 * @brief Returns a constant reference to the last item in the list.
 *
-* @par Preconditions
+* @preconditions
 *  - list is non-empty
 */
 BList::const_reference BList::back() const {
