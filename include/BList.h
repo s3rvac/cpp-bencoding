@@ -49,8 +49,7 @@ public:
 
 public:
 	static std::unique_ptr<BList> create();
-	static std::unique_ptr<BList> create(
-		std::initializer_list<std::shared_ptr<BItem>> items);
+	static std::unique_ptr<BList> create(std::initializer_list<value_type> items);
 
 	/// @name Capacity
 	/// @{
@@ -60,7 +59,7 @@ public:
 
 	/// @name Modifiers
 	/// @{
-	void push_back(std::shared_ptr<BItem> bItem);
+	void push_back(const value_type &bItem);
 	void pop_back();
 	/// @}
 
@@ -89,7 +88,7 @@ public:
 
 private:
 	BList();
-	explicit BList(std::initializer_list<std::shared_ptr<BItem>> items);
+	explicit BList(std::initializer_list<value_type> items);
 
 private:
 	/// Underlying list of items.

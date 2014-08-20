@@ -21,7 +21,7 @@ BList::BList() = default;
 /**
 * @brief Constructs a list containing the given @a items.
 */
-BList::BList(std::initializer_list<std::shared_ptr<BItem>> items):
+BList::BList(std::initializer_list<value_type> items):
 	itemList(items) {}
 
 /**
@@ -34,8 +34,7 @@ std::unique_ptr<BList> BList::create() {
 /**
 * @brief Creates a returns a new list containing the given @a items.
 */
-std::unique_ptr<BList> BList::create(
-		std::initializer_list<std::shared_ptr<BItem>> items) {
+std::unique_ptr<BList> BList::create(std::initializer_list<value_type> items) {
 	return std::unique_ptr<BList>(new BList(items));
 }
 
@@ -61,7 +60,7 @@ bool BList::empty() const {
 * @preconditions
 *  - @a bItem is non-null
 */
-void BList::push_back(std::shared_ptr<BItem> bItem) {
+void BList::push_back(const value_type &bItem) {
 	assert(bItem && "cannot add a null item to the list");
 
 	itemList.push_back(bItem);
