@@ -67,7 +67,7 @@ PrettyReprOfListWithTwoStringsIsCorrect) {
 	bList->push_back(BString::create("test"));
 	bList->push_back(BString::create("hello"));
 
-	EXPECT_EQ("[\"test\", \"hello\"]", printer->getPrettyRepr(bList));
+	EXPECT_EQ(R"(["test", "hello"])", printer->getPrettyRepr(bList));
 }
 
 //
@@ -78,14 +78,21 @@ TEST_F(PrettyPrinterTests,
 PrettyReprOfEmptyStringIsCorrect) {
 	std::shared_ptr<BItem> data(BString::create(""));
 
-	EXPECT_EQ("\"\"", printer->getPrettyRepr(data));
+	EXPECT_EQ(R"("")", printer->getPrettyRepr(data));
 }
 
 TEST_F(PrettyPrinterTests,
 PrettyReprOfNonemptyStringIsCorrect) {
 	std::shared_ptr<BItem> data(BString::create("test"));
 
-	EXPECT_EQ("\"test\"", printer->getPrettyRepr(data));
+	EXPECT_EQ(R"("test")", printer->getPrettyRepr(data));
+}
+
+TEST_F(PrettyPrinterTests,
+QuoteInsideStringIsPrefixedWithBackslash) {
+	std::shared_ptr<BItem> data(BString::create("te\"st"));
+
+	EXPECT_EQ(R"("te\"st")", printer->getPrettyRepr(data));
 }
 
 } // namespace tests

@@ -10,6 +10,7 @@
 #include "BInteger.h"
 #include "BList.h"
 #include "BString.h"
+#include "Utils.h"
 
 namespace bencoding {
 
@@ -52,7 +53,8 @@ void PrettyPrinter::visit(BList *bList) {
 }
 
 void PrettyPrinter::visit(BString *bString) {
-	prettyRepr += "\"" + bString->value() + "\"";
+	// We have to put a backslash before quotes, i.e. replace " with \".
+	prettyRepr += '"' + replace(bString->value(), '"', std::string(R"(\")")) + '"';
 }
 
 } // namespace bencoding
