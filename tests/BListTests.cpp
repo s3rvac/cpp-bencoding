@@ -33,7 +33,7 @@ ListIsNotEmptyAfterItemIsAppendedToEmptyList) {
 }
 
 TEST_F(BListTests,
-SizeCorrespondsToNumberOfItemsInList) {
+SizeCorrespondsToNumberOfItemsAppendedIntoList) {
 	auto l = BList::create();
 
 	ASSERT_EQ(0, l->size());
