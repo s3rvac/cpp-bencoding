@@ -20,6 +20,7 @@ set(TESTS_SOURCES
 	DecoderTests.cpp
 	EncoderTests.cpp
 	PrettyPrinterTests.cpp
+	TestUtils.cpp
 	UtilsTests.cpp
 )
 

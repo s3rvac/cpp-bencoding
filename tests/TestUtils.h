@@ -5,6 +5,7 @@
 * @brief     Test utilities.
 */
 
+#include <istream>
 #include <string>
 
 #include <gtest/gtest.h>
@@ -19,3 +20,10 @@
 		std::string(".") + \
 		testing::UnitTest::GetInstance()->current_test_info()->name() \
 	)
+
+namespace bencoding {
+
+void putIntoErrorState(std::istream &stream);
+void putIntoEOFState(std::istream &stream);
+
+} // namespace bencoding
