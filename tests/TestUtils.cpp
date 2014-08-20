@@ -10,6 +10,7 @@
 #include <ios>
 
 namespace bencoding {
+namespace tests {
 
 /**
 * @brief Puts @a stream into an error state.
@@ -25,4 +26,5 @@ void putIntoEOFState(std::istream &stream) {
 	stream.setstate(std::ios::eofbit);
 }
 
+} // namespace tests
 } // namespace bencoding

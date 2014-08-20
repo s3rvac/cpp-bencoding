@@ -25,10 +25,12 @@
 	)
 
 namespace bencoding {
+namespace tests {
 
 void putIntoErrorState(std::istream &stream);
 void putIntoEOFState(std::istream &stream);
 
+} // namespace tests
 } // namespace bencoding
 
 #endif
