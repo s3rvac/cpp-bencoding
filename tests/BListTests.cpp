@@ -25,6 +25,13 @@ ListIsEmptyAfterCreation) {
 }
 
 TEST_F(BListTests,
+ListIsEmptyAfterCreationFromEmptySequenceOfItems) {
+	auto l = BList::create({});
+
+	EXPECT_TRUE(l->empty());
+}
+
+TEST_F(BListTests,
 ListIsNotEmptyAfterItemIsAppendedToEmptyList) {
 	auto l = BList::create();
 	l->push_back(BInteger::create(1));
@@ -41,6 +48,17 @@ SizeCorrespondsToNumberOfItemsAppendedIntoList) {
 	ASSERT_EQ(1, l->size());
 	l->push_back(BInteger::create(1));
 	ASSERT_EQ(2, l->size());
+}
+
+TEST_F(BListTests,
+ListCreatedFromNonEmptySequenceOfItemsContainsTheItems) {
+	std::shared_ptr<BItem> firstItem = BInteger::create(1);
+	std::shared_ptr<BItem> secondItem = BInteger::create(2);
+	auto l = BList::create({firstItem, secondItem});
+
+	EXPECT_EQ(2, l->size());
+	EXPECT_EQ(firstItem, l->front());
+	EXPECT_EQ(secondItem, l->back());
 }
 
 TEST_F(BListTests,

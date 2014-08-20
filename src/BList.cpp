@@ -19,10 +19,24 @@ namespace bencoding {
 BList::BList() = default;
 
 /**
+* @brief Constructs a list containing the given @a items.
+*/
+BList::BList(std::initializer_list<std::shared_ptr<BItem>> items):
+	itemList(items) {}
+
+/**
 * @brief Creates and returns a new list.
 */
 std::unique_ptr<BList> BList::create() {
 	return std::unique_ptr<BList>(new BList());
+}
+
+/**
+* @brief Creates a returns a new list containing the given @a items.
+*/
+std::unique_ptr<BList> BList::create(
+		std::initializer_list<std::shared_ptr<BItem>> items) {
+	return std::unique_ptr<BList>(new BList(items));
 }
 
 /**

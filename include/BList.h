@@ -8,6 +8,7 @@
 #ifndef BENCODING_BLIST_H
 #define BENCODING_BLIST_H
 
+#include <initializer_list>
 #include <list>
 #include <memory>
 
@@ -48,6 +49,8 @@ public:
 
 public:
 	static std::unique_ptr<BList> create();
+	static std::unique_ptr<BList> create(
+		std::initializer_list<std::shared_ptr<BItem>> items);
 
 	/// @name Capacity
 	/// @{
@@ -86,6 +89,7 @@ public:
 
 private:
 	BList();
+	explicit BList(std::initializer_list<std::shared_ptr<BItem>> items);
 
 private:
 	/// Underlying list of items.
