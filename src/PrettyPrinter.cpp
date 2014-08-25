@@ -7,6 +7,7 @@
 
 #include "PrettyPrinter.h"
 
+#include "BDictionary.h"
 #include "BInteger.h"
 #include "BList.h"
 #include "BString.h"
@@ -36,7 +37,18 @@ std::string PrettyPrinter::getPrettyRepr(std::shared_ptr<BItem> data) {
 }
 
 void PrettyPrinter::visit(BDictionary *bDictionary) {
-	// TODO
+	prettyRepr += "{";
+	bool putComma = false;
+	for (auto &item : *bDictionary) {
+		if (putComma) {
+			prettyRepr += ", ";
+		}
+		item.first->accept(this);
+		prettyRepr += ": ";
+		item.second->accept(this);
+		putComma = true;
+	}
+	prettyRepr += "}";
 }
 
 void PrettyPrinter::visit(BInteger *bInteger) {
