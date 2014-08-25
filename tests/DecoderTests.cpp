@@ -10,6 +10,7 @@
 
 #include <gtest/gtest.h>
 
+#include "BDictionary.h"
 #include "BInteger.h"
 #include "BList.h"
 #include "BString.h"
@@ -47,7 +48,75 @@ void DecoderTests::assertDecodedAs(
 // Dictionary decoding.
 //
 
-// TODO
+TEST_F(DecoderTests,
+EmptyDictionaryIsDecodedCorrectly) {
+	std::string data("de");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BDictionary>(bItem);
+	auto bDictionary = bItem->as<BDictionary>();
+	EXPECT_TRUE(bDictionary->empty());
+}
+
+TEST_F(DecoderTests,
+DictionaryWithSingleItemIsDecodedCorrectly) {
+	std::string data("d4:testi1ee");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BDictionary>(bItem);
+	auto bDictionary = bItem->as<BDictionary>();
+	EXPECT_EQ(1, bDictionary->size());
+
+	auto i = bDictionary->begin();
+	assertDecodedAs<BString>(i->first);
+	auto key = i->first->as<BString>();
+	EXPECT_EQ("test", key->value());
+
+	assertDecodedAs<BInteger>(i->second);
+	auto value = i->second->as<BInteger>();
+	EXPECT_EQ(1, value->value());
+}
+
+TEST_F(DecoderTests,
+DictionaryWithTwoItemsIsDecodedCorrectly) {
+	std::string data("d5:test1i1e5:test2i2ee");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BDictionary>(bItem);
+	auto bDictionary = bItem->as<BDictionary>();
+	EXPECT_EQ(2, bDictionary->size());
+
+	auto i = bDictionary->begin();
+	assertDecodedAs<BString>(i->first);
+	auto key1 = i->first->as<BString>();
+	EXPECT_EQ("test1", key1->value());
+
+	assertDecodedAs<BInteger>(i->second);
+	auto value1 = i->second->as<BInteger>();
+	EXPECT_EQ(1, value1->value());
+
+	++i;
+	assertDecodedAs<BString>(i->first);
+	auto key2 = i->first->as<BString>();
+	EXPECT_EQ("test2", key2->value());
+
+	assertDecodedAs<BInteger>(i->second);
+	auto value2 = i->second->as<BInteger>();
+	EXPECT_EQ(2, value2->value());
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenDecodingDictionaryWithoutEndingE) {
+	EXPECT_THROW(decoder->decode("d"), DecodingError);
+}
+
+TEST_F(DecoderTests,
+DecodeThrowsDecodingErrorWhenDecodingDictionaryWithKeyNotBeingString) {
+	EXPECT_THROW(decoder->decode("di1ei2ee"), DecodingError);
+}
 
 //
 // Integer decoding.

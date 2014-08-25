@@ -16,6 +16,7 @@
 
 namespace bencoding {
 
+class BDictionary;
 class BInteger;
 class BList;
 class BString;
@@ -48,6 +49,15 @@ private:
 	Decoder();
 
 	void readExpectedChar(std::istream &input, char expected_char) const;
+
+	/// @name Integer Decoding
+	/// @{
+	std::unique_ptr<BDictionary> decodeDictionary(std::istream &input);
+	std::unique_ptr<BDictionary> decodeDictionaryItemsIntoDictionary(
+		std::istream &input);
+	std::shared_ptr<BString> decodeDictionaryKey(std::istream &input);
+	std::unique_ptr<BItem> decodeDictionaryValue(std::istream &input);
+	/// @}
 
 	/// @name Integer Decoding
 	/// @{

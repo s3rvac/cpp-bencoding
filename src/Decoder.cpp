@@ -11,6 +11,7 @@
 #include <regex>
 #include <sstream>
 
+#include "BDictionary.h"
 #include "BInteger.h"
 #include "BList.h"
 #include "BString.h"
@@ -58,6 +59,8 @@ std::unique_ptr<BItem> Decoder::decode(const std::string &data) {
 */
 std::unique_ptr<BItem> Decoder::decode(std::istream &input) {
 	switch (input.peek()) {
+		case 'd':
+			return decodeDictionary(input);
 		case 'i':
 			return decodeInteger(input);
 		case 'l':
@@ -91,6 +94,67 @@ void Decoder::readExpectedChar(std::istream &input, char expected_char) const {
 		throw DecodingError(std::string("expected '") + expected_char +
 			"', got '" + static_cast<char>(c) + "'");
 	}
+}
+
+/**
+* @brief Decodes a dictionary from @a input.
+*
+* @par Format
+* @code
+* d<bencoded string><bencoded element>e
+* @endcode
+*
+* @par Example
+* @code
+* d3:cow3:moo4:spam4:eggse represents the dictionary {"cow": "moo", "spam": "eggs"}
+* d4:spaml1:a1:bee represents the dictionary {"spam": ["a", "b"]}
+* @endcode
+*
+* The keys must be bencoded strings. The values may be any bencoded type,
+* including integers, strings, lists, and other dictionaries.
+*/
+std::unique_ptr<BDictionary> Decoder::decodeDictionary(std::istream &input) {
+	readExpectedChar(input, 'd');
+	auto bDictionary = decodeDictionaryItemsIntoDictionary(input);
+	readExpectedChar(input, 'e');
+	return bDictionary;
+}
+
+/**
+* @brief Decodes items from @a input, adds them to a dictionary, and returns
+*        that dictionary.
+*/
+std::unique_ptr<BDictionary> Decoder::decodeDictionaryItemsIntoDictionary(
+		std::istream &input) {
+	auto bDictionary = BDictionary::create();
+	while (input && input.peek() != 'e') {
+		std::shared_ptr<BString> key(decodeDictionaryKey(input));
+		std::shared_ptr<BItem> value(decodeDictionaryValue(input));
+		(*bDictionary)[key] = value;
+	}
+	return bDictionary;
+}
+
+/**
+* @brief Decodes a dictionary key from @a input.
+*/
+std::shared_ptr<BString> Decoder::decodeDictionaryKey(std::istream &input) {
+	std::shared_ptr<BItem> key(decode(input));
+	// A dictionary key has to be a string.
+	std::shared_ptr<BString> keyAsBString(key->as<BString>());
+	if (!keyAsBString) {
+		throw DecodingError(
+			"found a dictionary key that is not a bencoded string"
+		);
+	}
+	return keyAsBString;
+}
+
+/**
+* @brief Decodes a dictionary value from @a input.
+*/
+std::unique_ptr<BItem> Decoder::decodeDictionaryValue(std::istream &input) {
+	return decode(input);
 }
 
 /**
