@@ -37,6 +37,11 @@ std::string PrettyPrinter::getPrettyRepr(std::shared_ptr<BItem> data) {
 }
 
 void PrettyPrinter::visit(BDictionary *bDictionary) {
+	//
+	// Format:
+	//
+	//    {"key1": value1, "key2": value2, ...}
+	//
 	prettyRepr += "{";
 	bool putComma = false;
 	for (auto &item : *bDictionary) {
@@ -52,10 +57,20 @@ void PrettyPrinter::visit(BDictionary *bDictionary) {
 }
 
 void PrettyPrinter::visit(BInteger *bInteger) {
+	//
+	// Format:
+	//
+	//     int
+	//
 	prettyRepr += std::to_string(bInteger->value());
 }
 
 void PrettyPrinter::visit(BList *bList) {
+	//
+	// Format:
+	//
+	//     [item1, item2, ...]
+	//
 	prettyRepr += "[";
 	bool putComma = false;
 	for (auto bItem : *bList) {
@@ -69,6 +84,11 @@ void PrettyPrinter::visit(BList *bList) {
 }
 
 void PrettyPrinter::visit(BString *bString) {
+	//
+	// Format:
+	//
+	//     "string"
+	//
 	// We have to put a backslash before quotes, i.e. replace " with \".
 	prettyRepr += '"' + replace(bString->value(), '"', std::string(R"(\")")) + '"';
 }
