@@ -7,6 +7,7 @@
 
 #include "Encoder.h"
 
+#include "BDictionary.h"
 #include "BInteger.h"
 #include "BList.h"
 #include "BString.h"
@@ -37,7 +38,12 @@ std::string Encoder::encode(std::shared_ptr<BItem> data) {
 void Encoder::visit(BDictionary *bDictionary) {
 	// See the description of Decoder::decodeDictionary() for the format and
 	// example.
-	// TODO
+	encodedData += "d";
+	for (auto item : *bDictionary) {
+		item.first->accept(this);
+		item.second->accept(this);
+	}
+	encodedData += "e";
 }
 
 void Encoder::visit(BInteger *bInteger) {

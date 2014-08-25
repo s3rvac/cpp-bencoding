@@ -7,6 +7,7 @@
 
 #include <gtest/gtest.h>
 
+#include "BDictionary.h"
 #include "BInteger.h"
 #include "BList.h"
 #include "BString.h"
@@ -29,7 +30,29 @@ protected:
 // Dictionary encoding.
 //
 
-// TODO
+TEST_F(EncoderTests,
+EmptyDictionarysIsCorrectlyEncoded) {
+	std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
+
+	EXPECT_EQ("de", encoder->encode(bDictionary));
+}
+
+TEST_F(EncoderTests,
+DictionarysWithOneItemIsCorrectlyEncoded) {
+	std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
+	(*bDictionary)[BString::create("test")] = BInteger::create(1);
+
+	EXPECT_EQ("d4:testi1ee", encoder->encode(bDictionary));
+}
+
+TEST_F(EncoderTests,
+DictionarysWithTwoItemsIsCorrectlyEncoded) {
+	std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
+	(*bDictionary)[BString::create("test1")] = BInteger::create(1);
+	(*bDictionary)[BString::create("test2")] = BInteger::create(2);
+
+	EXPECT_EQ("d5:test1i1e5:test2i2ee", encoder->encode(bDictionary));
+}
 
 //
 // Integer encoding.
