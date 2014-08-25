@@ -26,6 +26,12 @@ protected:
 };
 
 //
+// Dictionary encoding.
+//
+
+// TODO
+
+//
 // Integer encoding.
 //
 

@@ -10,6 +10,7 @@
 
 namespace bencoding {
 
+class BDictionary;
 class BInteger;
 class BList;
 class BString;
@@ -25,6 +26,7 @@ class BItemVisitor {
 public:
 	virtual ~BItemVisitor();
 
+	virtual void visit(BDictionary *bDictionary) = 0;
 	virtual void visit(BInteger *bInteger) = 0;
 	virtual void visit(BList *blist) = 0;
 	virtual void visit(BString *bString) = 0;

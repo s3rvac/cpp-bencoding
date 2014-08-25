@@ -35,6 +35,10 @@ std::string PrettyPrinter::getPrettyRepr(std::shared_ptr<BItem> data) {
 	return prettyRepr;
 }
 
+void PrettyPrinter::visit(BDictionary *bDictionary) {
+	// TODO
+}
+
 void PrettyPrinter::visit(BInteger *bInteger) {
 	prettyRepr += std::to_string(bInteger->value());
 }

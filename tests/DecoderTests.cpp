@@ -44,6 +44,12 @@ void DecoderTests::assertDecodedAs(
 }
 
 //
+// Dictionary decoding.
+//
+
+// TODO
+
+//
 // Integer decoding.
 //
 

@@ -34,6 +34,12 @@ std::string Encoder::encode(std::shared_ptr<BItem> data) {
 	return encodedData;
 }
 
+void Encoder::visit(BDictionary *bDictionary) {
+	// See the description of Decoder::decodeDictionary() for the format and
+	// example.
+	// TODO
+}
+
 void Encoder::visit(BInteger *bInteger) {
 	// See the description of Decoder::decodeInteger() for the format and
 	// example.
