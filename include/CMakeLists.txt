@@ -7,6 +7,7 @@
 ##
 
 set(INCLUDES
+	bencoding.h
 	BDictionary.h
 	BInteger.h
 	BItem.h
