@@ -75,7 +75,7 @@ void Encoder::visit(BString *bString) {
 * @brief Encodes the given @a data and returns them.
 *
 * This function can be handy if you just want to encode data without explicitly
-* creating an encoder a calling @c encode() on it.
+* creating an encoder and calling @c encode() on it.
 *
 * See Encoder::encode() for more details.
 */
