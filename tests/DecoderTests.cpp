@@ -109,6 +109,39 @@ DictionaryWithTwoItemsIsDecodedCorrectly) {
 }
 
 TEST_F(DecoderTests,
+DictionaryWithKeysThatAreNotSortedIsDecodedCorrectly) {
+	// Even though the specification says that a dictionary has all its keys
+	// lexicographically sorted, we support the decoding of dictionaries whose
+	// keys are not sorted. The resulting dictionary, however, will always have
+	// its keys sorted to conform to the specification.
+	std::string data("d1:bi2e1:ai1ee");
+	std::shared_ptr<BItem> bItem(decoder->decode(data));
+
+	ADD_SCOPED_TRACE;
+	assertDecodedAs<BDictionary>(bItem);
+	auto bDictionary = bItem->as<BDictionary>();
+	EXPECT_EQ(2, bDictionary->size());
+
+	auto i = bDictionary->begin();
+	assertDecodedAs<BString>(i->first);
+	auto key1 = i->first->as<BString>();
+	EXPECT_EQ("a", key1->value());
+
+	assertDecodedAs<BInteger>(i->second);
+	auto value1 = i->second->as<BInteger>();
+	EXPECT_EQ(1, value1->value());
+
+	++i;
+	assertDecodedAs<BString>(i->first);
+	auto key2 = i->first->as<BString>();
+	EXPECT_EQ("b", key2->value());
+
+	assertDecodedAs<BInteger>(i->second);
+	auto value2 = i->second->as<BInteger>();
+	EXPECT_EQ(2, value2->value());
+}
+
+TEST_F(DecoderTests,
 DecodeThrowsDecodingErrorWhenDecodingDictionaryWithoutEndingE) {
 	EXPECT_THROW(decoder->decode("d"), DecodingError);
 }

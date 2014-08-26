@@ -111,7 +111,11 @@ void Decoder::readExpectedChar(std::istream &input, char expected_char) const {
 * @endcode
 *
 * The keys must be bencoded strings. The values may be any bencoded type,
-* including integers, strings, lists, and other dictionaries.
+* including integers, strings, lists, and other dictionaries. This function
+* supports decoding of dictionaries whose keys are not lexicographically sorted
+* (according to the <a
+* href="https://wiki.theory.org/BitTorrentSpecification#Bencoding">specification</a>,
+* they must be sorted).
 */
 std::unique_ptr<BDictionary> Decoder::decodeDictionary(std::istream &input) {
 	readExpectedChar(input, 'd');
