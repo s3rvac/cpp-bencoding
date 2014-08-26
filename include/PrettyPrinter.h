@@ -46,6 +46,11 @@ private:
 	std::string prettyRepr;
 };
 
+/// @name Printing Without Explicit Printer Creation
+/// @{
+std::string getPrettyRepr(std::shared_ptr<BItem> data);
+/// @}
+
 } // namespace bencoding
 
 #endif

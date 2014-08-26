@@ -93,4 +93,17 @@ void PrettyPrinter::visit(BString *bString) {
 	prettyRepr += '"' + replace(bString->value(), '"', std::string(R"(\")")) + '"';
 }
 
+/**
+* @brief Returns a pretty representation of @a data.
+*
+* This function can be handy if you just want to pretty-print data without
+* explicitly creating a pretty printer and calling @c encode() on it.
+*
+* See PrettyPrinter::getPrettyRepr() for more details.
+*/
+std::string getPrettyRepr(std::shared_ptr<BItem> data) {
+	auto prettyPrinter = PrettyPrinter::create();
+	return prettyPrinter->getPrettyRepr(data);
+}
+
 } // namespace bencoding

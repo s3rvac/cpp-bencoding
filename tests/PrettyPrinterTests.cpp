@@ -124,5 +124,16 @@ QuoteInsideStringIsPrefixedWithBackslash) {
 	EXPECT_EQ(R"("te\"st")", printer->getPrettyRepr(data));
 }
 
+//
+// Other.
+//
+
+TEST_F(PrettyPrinterTests,
+GetPrettyReprFunctionWorksAsCreatingPrettyPrinterAndCallingGetPrettyRepr) {
+	std::shared_ptr<BItem> data(BInteger::create(0));
+
+	EXPECT_EQ("0", getPrettyRepr(data));
+}
+
 } // namespace tests
 } // namespace bencoding
