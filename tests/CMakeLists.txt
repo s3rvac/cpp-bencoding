@@ -12,7 +12,7 @@ endif()
 
 find_package(GTest REQUIRED)
 
-set(TESTS_SOURCES
+set(TESTER_SOURCES
 	BDictionaryTests.cpp
 	BIntegerTests.cpp
 	BListTests.cpp
@@ -24,8 +24,8 @@ set(TESTS_SOURCES
 	UtilsTests.cpp
 )
 
-add_executable(tests ${TESTS_SOURCES})
+add_executable(tester ${TESTER_SOURCES})
 
-target_link_libraries(tests bencoding gtest gtest_main)
+target_link_libraries(tester bencoding gtest gtest_main)
 
-install(TARGETS tests DESTINATION "${INSTALL_BIN_DIR}")
+install(TARGETS tester DESTINATION "${INSTALL_BIN_DIR}")
