@@ -253,46 +253,6 @@ ReadUntilDoesNotReadAnyDataWhenInputIsAtEOF) {
 }
 
 //
-// clear()
-//
-
-template <class ContainerType>
-void scenarioClearEmptiesContainer(ContainerType &container) {
-	clear(container);
-	EXPECT_TRUE(container.empty());
-}
-
-TEST_F(UtilsTests,
-ClearOnVectorClearsIt) {
-	std::vector<int> v(100, 0);
-
-	ADD_SCOPED_TRACE;
-	scenarioClearEmptiesContainer(v);
-}
-
-TEST_F(UtilsTests,
-ClearOnQueueClearsIt) {
-	std::queue<int> q;
-	q.push(1);
-	q.push(2);
-	q.push(3);
-
-	ADD_SCOPED_TRACE;
-	scenarioClearEmptiesContainer(q);
-}
-
-TEST_F(UtilsTests,
-ClearOnStackClearsIt) {
-	std::stack<int> s;
-	s.push(1);
-	s.push(2);
-	s.push(3);
-
-	ADD_SCOPED_TRACE;
-	scenarioClearEmptiesContainer(s);
-}
-
-//
 // replace()
 //
 
