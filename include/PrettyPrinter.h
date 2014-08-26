@@ -42,7 +42,7 @@ private:
 	/// @}
 
 private:
-	/// Pretty representation of data obtained so far.
+	/// Pretty representation of the data obtained so far.
 	std::string prettyRepr;
 };
 
