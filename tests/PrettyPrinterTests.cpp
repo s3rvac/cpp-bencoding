@@ -31,7 +31,7 @@ protected:
 //
 
 TEST_F(PrettyPrinterTests,
-PrettyReprOfEmptyDictionarysCorrect) {
+PrettyReprOfEmptyDictionaryIsCorrect) {
 	std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
 
 	EXPECT_EQ("{}", printer->getPrettyRepr(bDictionary));
