@@ -8,6 +8,7 @@
 #ifndef BENCODING_BDICTIONARY_H
 #define BENCODING_BDICTIONARY_H
 
+#include <initializer_list>
 #include <map>
 #include <memory>
 
@@ -83,6 +84,8 @@ public:
 
 public:
 	static std::unique_ptr<BDictionary> create();
+	static std::unique_ptr<BDictionary> create(
+		std::initializer_list<value_type> items);
 
 	/// @name Capacity
 	/// @{
@@ -112,6 +115,7 @@ public:
 
 private:
 	BDictionary();
+	explicit BDictionary(std::initializer_list<value_type> items);
 
 private:
 	/// Underlying list of items.

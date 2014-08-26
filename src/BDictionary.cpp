@@ -31,10 +31,24 @@ bool BDictionary::BStringByValueComparator::operator()(
 BDictionary::BDictionary() = default;
 
 /**
+* @brief Constructs a dictionary from the given items.
+*/
+BDictionary::BDictionary(std::initializer_list<value_type> items):
+	itemMap(items) {}
+
+/**
 * @brief Creates and returns a new dictionary.
 */
 std::unique_ptr<BDictionary> BDictionary::create() {
 	return std::unique_ptr<BDictionary>(new BDictionary());
+}
+
+/**
+* @brief Creates and returns a new dictionary containing the given @a items.
+*/
+std::unique_ptr<BDictionary> BDictionary::create(
+		std::initializer_list<value_type> items) {
+	return std::unique_ptr<BDictionary>(new BDictionary(items));
 }
 
 /**
