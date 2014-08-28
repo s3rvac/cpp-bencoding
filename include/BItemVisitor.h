@@ -2,7 +2,7 @@
 * @file      BItemVisitor.h
 * @copyright (c) 2014 by Petr Zemek (s3rvac@gmail.com) and contributors
 * @license   BSD, see the @c LICENSE file for more details
-* @brief     Base class for all visitors of the subclasses of BItem.
+* @brief     Base class for all visitors of the BItem subclasses.
 */
 
 #ifndef BENCODING_BITEMVISITOR_H
@@ -16,7 +16,7 @@ class BList;
 class BString;
 
 /**
-* @brief Base class for all visitors of the subclasses of BItem.
+* @brief Base class for all visitors of the BItem subclasses.
 *
 * Implements the <a
 * href="http://en.wikipedia.org/wiki/Visitor_design_pattern">Visitor design
