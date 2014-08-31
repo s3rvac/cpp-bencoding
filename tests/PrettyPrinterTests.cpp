@@ -188,6 +188,14 @@ QuoteInsideStringIsPrefixedWithBackslash) {
 //
 
 TEST_F(PrettyPrinterTests,
+GetPrettyReprFunctionWorksAsCreatingPrettyPrinterAndCallingGetPrettyRepr) {
+	std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
+	(*bDictionary)[BString::create("test")] = BInteger::create(1);
+
+	EXPECT_EQ("{\n  \"test\": 1\n}", getPrettyRepr(bDictionary, "  "));
+}
+
+TEST_F(PrettyPrinterTests,
 GetPrettyReprWithoutIndentFunctionWorksAsCreatingPrettyPrinterAndCallingGetPrettyReprWithoutIndent) {
 	std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
 	(*bDictionary)[BString::create("test")] = BInteger::create(1);
