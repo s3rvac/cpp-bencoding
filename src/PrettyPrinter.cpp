@@ -32,32 +32,12 @@ std::unique_ptr<PrettyPrinter> PrettyPrinter::create() {
 *
 * @param[in] data Data to return a pretty representation for.
 * @param[in] indent A single level of indentation.
-*
-* Use getPrettyReprWithoutIndent() if you want to get a pretty representation
-* without any indentation.
 */
 std::string PrettyPrinter::getPrettyRepr(std::shared_ptr<BItem> data,
 		const std::string &indent) {
 	prettyRepr.clear();
 	indentLevel = indent;
 	currentIndent.clear();
-	this->indent = true;
-	data->accept(this);
-	return prettyRepr;
-}
-
-/**
-* @brief Returns a pretty representation of @a data without any indentation.
-*
-* @param[in] data Data to return a pretty representation for.
-* @param[in] indent A single level of indentation.
-*
-* Use getPrettyRepr() if you want to get a pretty representation with
-* indentation.
-*/
-std::string PrettyPrinter::getPrettyReprWithoutIndent(std::shared_ptr<BItem> data) {
-	prettyRepr.clear();
-	indent = false;
 	data->accept(this);
 	return prettyRepr;
 }
@@ -85,34 +65,6 @@ void PrettyPrinter::decreaseIndentLevel() {
 }
 
 void PrettyPrinter::visit(BDictionary *bDictionary) {
-	if (indent) {
-		formatAndStoreWithIndent(bDictionary);
-	} else {
-		formatAndStoreWithoutIndent(bDictionary);
-	}
-}
-
-void PrettyPrinter::visit(BInteger *bInteger) {
-	formatAndStore(bInteger);
-}
-
-void PrettyPrinter::visit(BList *bList) {
-	if (indent) {
-		formatAndStoreWithIndent(bList);
-	} else {
-		formatAndStoreWithoutIndent(bList);
-	}
-}
-
-void PrettyPrinter::visit(BString *bString) {
-	formatAndStore(bString);
-}
-
-/**
-* @brief Formats @a bDictionary with an indentation and stores it into @c
-*        prettyRepr.
-*/
-void PrettyPrinter::formatAndStoreWithIndent(BDictionary *bDictionary) {
 	//
 	// Format:
 	//
@@ -143,34 +95,7 @@ void PrettyPrinter::formatAndStoreWithIndent(BDictionary *bDictionary) {
 	prettyRepr += "}";
 }
 
-/**
-* @brief Formats @a bDictionary without an indentation and stores it into @c
-*        prettyRepr.
-*/
-void PrettyPrinter::formatAndStoreWithoutIndent(BDictionary *bDictionary) {
-	//
-	// Format:
-	//
-	//    {"key1": value1, "key2": value2, ...}
-	//
-	prettyRepr += "{";
-	bool putComma = false;
-	for (auto &item : *bDictionary) {
-		if (putComma) {
-			prettyRepr += ", ";
-		}
-		item.first->accept(this);
-		prettyRepr += ": ";
-		item.second->accept(this);
-		putComma = true;
-	}
-	prettyRepr += "}";
-}
-
-/**
-* @brief Formats @a bInteger and stores it into @c prettyRepr.
-*/
-void PrettyPrinter::formatAndStore(BInteger *bInteger) {
+void PrettyPrinter::visit(BInteger *bInteger) {
 	//
 	// Format (the same with and without indentation):
 	//
@@ -179,11 +104,7 @@ void PrettyPrinter::formatAndStore(BInteger *bInteger) {
 	prettyRepr += std::to_string(bInteger->value());
 }
 
-/**
-* @brief Formats @a bList with an indentation and stores it into @c
-*        prettyRepr.
-*/
-void PrettyPrinter::formatAndStoreWithIndent(BList *bList) {
+void PrettyPrinter::visit(BList *bList) {
 	//
 	// Format:
 	//
@@ -212,32 +133,7 @@ void PrettyPrinter::formatAndStoreWithIndent(BList *bList) {
 	prettyRepr += "]";
 }
 
-/**
-* @brief Formats @a bList without an indentation and stores it into @c
-*        prettyRepr.
-*/
-void PrettyPrinter::formatAndStoreWithoutIndent(BList *bList) {
-	//
-	// Format:
-	//
-	//     [item1, item2, ...]
-	//
-	prettyRepr += "[";
-	bool putComma = false;
-	for (auto bItem : *bList) {
-		if (putComma) {
-			prettyRepr += ", ";
-		}
-		bItem->accept(this);
-		putComma = true;
-	}
-	prettyRepr += "]";
-}
-
-/**
-* @brief Formats @a bString and stores it into @c prettyRepr.
-*/
-void PrettyPrinter::formatAndStore(BString *bString) {
+void PrettyPrinter::visit(BString *bString) {
 	//
 	// Format (the same with and without indentation):
 	//
@@ -259,19 +155,6 @@ std::string getPrettyRepr(std::shared_ptr<BItem> data,
 		const std::string &indent) {
 	auto prettyPrinter = PrettyPrinter::create();
 	return prettyPrinter->getPrettyRepr(data, indent);
-}
-
-/**
-* @brief Returns a pretty representation of @a data without any indentation.
-*
-* This function can be handy if you just want to pretty-print data without
-* explicitly creating a pretty printer and calling @c encode() on it.
-*
-* See PrettyPrinter::getPrettyReprWithoutIndent() for more details.
-*/
-std::string getPrettyReprWithoutIndent(std::shared_ptr<BItem> data) {
-	auto prettyPrinter = PrettyPrinter::create();
-	return prettyPrinter->getPrettyReprWithoutIndent(data);
 }
 
 } // namespace bencoding
