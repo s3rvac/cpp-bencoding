@@ -188,10 +188,11 @@ QuoteInsideStringIsPrefixedWithBackslash) {
 //
 
 TEST_F(PrettyPrinterTests,
-GetPrettyReprFunctionWorksAsCreatingPrettyPrinterAndCallingGetPrettyRepr) {
-	std::shared_ptr<BItem> data(BInteger::create(0));
+GetPrettyReprWithoutIndentFunctionWorksAsCreatingPrettyPrinterAndCallingGetPrettyReprWithoutIndent) {
+	std::shared_ptr<BDictionary> bDictionary(BDictionary::create());
+	(*bDictionary)[BString::create("test")] = BInteger::create(1);
 
-	EXPECT_EQ("0", getPrettyReprWithoutIndent(data));
+	EXPECT_EQ("{\"test\": 1}", getPrettyReprWithoutIndent(bDictionary));
 }
 
 } // namespace tests
