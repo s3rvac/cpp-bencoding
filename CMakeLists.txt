@@ -13,6 +13,7 @@ project(cpp-bencoding CXX)
 ## Options.
 ##
 
+option(WITH_COVERAGE "Build with code coverage support (requires lcov)." OFF)
 option(WITH_DOC "Build API documentation (requires Doxygen)." ON)
 option(WITH_TESTS "Build tests (requires Google Test)." ON)
 
@@ -54,6 +55,32 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wold-style-cast")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wswitch-default")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wuninitialized")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wuseless-cast")
+
+##
+## Code coverage.
+##
+
+if(WITH_COVERAGE)
+	# Enable code coverage.
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+
+	# Build with debugging information to make the output meaningful.
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+
+	# Disable optimizations to get the most accurate results.
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
+
+	# Add a custom target to generate the code coverage.
+	add_custom_target(coverage
+		COMMENT "Running the tests and generating code coverage"
+		COMMAND "${PROJECT_BINARY_DIR}/tests/tester"
+		COMMAND mkdir -p coverage
+		COMMAND lcov --capture --directory include --directory src
+			--directory tests --directory "${PROJECT_BINARY_DIR}"
+			--no-external --output-file coverage/coverage.info
+		COMMAND genhtml coverage/coverage.info --output-directory coverage
+		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
+endif()
 
 ##
 ## Subdirectories.
