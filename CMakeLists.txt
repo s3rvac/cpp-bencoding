@@ -14,8 +14,8 @@ project(cpp-bencoding CXX)
 ##
 
 option(WITH_COVERAGE "Build with code coverage support (requires lcov)." OFF)
-option(WITH_DOC "Build API documentation (requires Doxygen)." ON)
-option(WITH_TESTS "Build tests (requires Google Test)." ON)
+option(WITH_DOC "Build API documentation (requires Doxygen)." OFF)
+option(WITH_TESTS "Build tests (requires Google Test)." OFF)
 
 ##
 ## Paths.
