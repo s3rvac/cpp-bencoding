@@ -73,7 +73,7 @@
 * }
 * @endcode
 *
-* See the @c src/decoder.cpp file for a complete example. Also, see the unit
+* See the @c sample/decoder.cpp file for a complete example. Also, see the unit
 * tests in the @c tests directory for additional example of using the API.
 */
 
