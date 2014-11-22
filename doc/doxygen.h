@@ -15,18 +15,17 @@
 *
 * The base namespace is @ref bencoding. All the classes and functions provided
 * by the library are part of this namespace. Unit tests are placed in the @c
-* bencoding::tests namespace, which is not included in the API documentation.
+* bencoding::tests namespace, which is not included in this API documentation.
 *
 * @par Directories
 *
-* The project files are situated into five directories:
-* - @c doc - Contains @c doxygen.h, which includes the documentation of this
-*   page.
+* The project files are situated in five directories:
+* - @c doc - Contains @c doxygen.h, which includes the text of this page.
 * - @c include - Header files to be included by client code.
 * - @c src - Source files of the library.
 * - @c sample - Source files of the sample (decoding of bencoded files). Not
-*   included in the API documentation.
-* - @c tests - Unit tests. Not included in the API documentation.
+*   included in this API documentation.
+* - @c tests - Unit tests. Not included in this API documentation.
 *
 * For a more detailed list, see the @c Files tab in this page's header.
 *
