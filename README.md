@@ -213,7 +213,7 @@ Any contributions are welcomed! Notes:
 License
 -------
 
-Copyright (c) 2014 Petr Zemek <s3rvac@gmail.com> and contributors
+Copyright (c) 2014 Petr Zemek (<s3rvac@gmail.com>) and contributors.
 
-Distributed under the BSD 3-clause license. See the LICENSE file for more
+Distributed under the BSD 3-clause license. See the `LICENSE` file for more
 details.
