@@ -38,7 +38,7 @@ include_directories(include)
 ##
 
 # C++11 is required.
-set(CMAKE_CXX_FLAGS "-std=c++11 -pedantic")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pedantic")
 
 # Abort compilation upon the first error.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wfatal-errors")
