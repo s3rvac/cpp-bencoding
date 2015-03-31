@@ -13,9 +13,13 @@ project(cpp-bencoding CXX)
 ## Options.
 ##
 
-option(WITH_COVERAGE "Build with code coverage support (requires lcov)." OFF)
+option(WITH_COVERAGE "Build with code coverage support (requires lcov and build with tests)." OFF)
 option(WITH_DOC "Build API documentation (requires Doxygen)." OFF)
 option(WITH_TESTS "Build tests (requires Google Test)." OFF)
+
+if(${WITH_COVERAGE})
+	set(WITH_TESTS ON)
+endif()
 
 ##
 ## Paths.
