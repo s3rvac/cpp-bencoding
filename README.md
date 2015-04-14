@@ -68,6 +68,7 @@ Build and Installation
    * `-DCMAKE_BUILD_TYPE=debug` to build the library with debugging
      information, which is useful during the development. By default, the
      library is built in the `release` mode.
+   * `-DCMAKE_INSTALL_PREFIX:PATH=/usr` to set a custom installation path.
 
    The `make` call supports standard parameters, such as:
    * `-j N` to build the library by using `N` processors.
@@ -78,7 +79,9 @@ Build and Installation
     make install
     ```
 
-   This will install the library into the `install` directory.
+   This will install the library into the selected installation path. If you
+   did not specify the path when calling `cmake`, it will be installed to the
+   `install` directory.
 
 Usage
 -----
