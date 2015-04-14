@@ -60,11 +60,11 @@ Build and Installation
 
    You can pass additional parameters to the `cmake` call:
    * `-DWITH_COVERAGE=1` to build with code coverage support (requires
-     [LCOV](http://ltp.sourceforge.net/coverage/lcov.php), disabled by default)
+     [LCOV](http://ltp.sourceforge.net/coverage/lcov.php), disabled by default).
    * `-DWITH_DOC=1` to build API documentation (requires
      [Doxygen](http://www.doxygen.org/), disabled by default).
    * `-DWITH_TESTS=1` to build tests (requires [Google
-     Test](https://code.google.com/p/googletest/), disabled by defauly)
+     Test](https://code.google.com/p/googletest/), disabled by defauly).
    * `-DCMAKE_BUILD_TYPE=debug` to build the library with debugging
      information, which is useful during the development. By default, the
      library is built in the `release` mode.
