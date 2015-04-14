@@ -14,6 +14,8 @@ find_package(Doxygen REQUIRED)
 
 set(DOXYGEN_CFG_IN "doxygen.in")
 set(DOXYGEN_CFG "${CMAKE_CURRENT_BINARY_DIR}/doxygen.cfg")
+# The trailing '/' after html is significant (otherwise, the files would be
+# installed into ${INSTALL_DOC_DIR}/html instead of ${INSTALL_DOC_DIR}).
 set(DOXYGEN_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/html/")
 
 # We need to set proper paths in the input Doxygen configuration file.
@@ -30,6 +32,4 @@ add_custom_target(doc ALL
 # Cleanup.
 set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${DOXYGEN_OUTPUT_DIR}")
 
-# The trailing '/' after html is significant (otherwise, the files would be
-# installed into ${INSTALL_DOC_DIR}/html instead of ${INSTALL_DOC_DIR}).
 install(DIRECTORY "${DOXYGEN_OUTPUT_DIR}" DESTINATION "${INSTALL_DOC_DIR}")
