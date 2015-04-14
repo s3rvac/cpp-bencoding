@@ -84,7 +84,9 @@ if(WITH_COVERAGE)
 		COMMAND lcov --capture --directory include --directory src
 			--directory tests --directory "${PROJECT_BINARY_DIR}"
 			--no-external --output-file coverage/coverage.info
-		COMMAND genhtml coverage/coverage.info --output-directory coverage
+		COMMAND genhtml --show-details --num-spaces 4 --demangle-cpp
+			--legend --title "cpp-bencoding code coverage"
+			coverage/coverage.info --output-directory coverage
 		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}")
 endif()
 
