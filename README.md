@@ -132,7 +132,9 @@ Usage
     For a full example, see the `sample/decoder.cpp` file.
 
 3. Setup the build system of your project to link the
-   `install/lib/libbencoding.a` library.
+   `install/lib/libbencoding.a` library. For example, with GCC, you can either
+   use `-Linstall/lib -lbencoding` or link the `install/lib/libbencoding.a`
+   file directly.
 
 Sample
 ------
