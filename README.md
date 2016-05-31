@@ -204,7 +204,7 @@ pattern](http://en.wikipedia.org/wiki/Visitor_pattern). You can create your own
 subclass that manipulates the bencoded data in any way you want. Two examples
 of using the `BItemVisitor` class are the `Encoder` and `PrettyPrinter`
 classes. See [my blog
-post](http://petrzemek.net/blog/2014/09/14/cpp-bencoding-new-cpp11-bencoding-library/)
+post](https://petrzemek.net/blog/2014/09/14/cpp-bencoding-new-cpp11-bencoding-library/)
 or their source code for more details.
 
 Contributions
