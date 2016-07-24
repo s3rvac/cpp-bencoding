@@ -29,7 +29,7 @@ Requirements
 ------------
 
 The following software is required:
-* A compiler supporting C++11, such as [GCC >= 4.8](https://gcc.gnu.org/).
+* A compiler supporting C++11, such as [GCC >= 4.9](https://gcc.gnu.org/).
 * [CMake](http://www.cmake.org/) to build and install the library.
 
 Optional:
