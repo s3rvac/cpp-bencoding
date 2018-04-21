@@ -1,6 +1,9 @@
 cpp-bencoding
 =============
 
+**Warning: This project was an experiment and is no longer maintained. I
+suggest using a different library.**
+
 A C++ [bencoding](http://en.wikipedia.org/wiki/Bencode) library supporting
 both decoding and encoding. It provides a simple API for decoding, encoding,
 and pretty-printing of bencoded data. It is also extensible so you can write
