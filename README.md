@@ -170,6 +170,8 @@ Output:
 }
 ```
 
+For more examples, see the API documentation.
+
 API Documentation
 -----------------
 
