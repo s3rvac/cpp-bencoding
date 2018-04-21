@@ -189,6 +189,12 @@ execute `install/bin/tester`. You need to have [Google
 Test](https://code.google.com/p/googletest/) installed to build and run the
 tests.
 
+Code Coverage
+-------------
+
+The latest code coverage by tests is available
+[here](https://projects.petrzemek.net/cpp-bencoding/coverage/latest/).
+
 To generate code coverage, pass `-DWITH_COVERAGE=1` when running `cmake`. After
 the library is built, run `make coverage` from the `build` directory to
 generate the code coverage. It can be then viewed in a web browser by opening
