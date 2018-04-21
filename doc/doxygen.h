@@ -44,36 +44,62 @@
 *
 * For a more detailed list, see the @c Classes tab in this page's header.
 *
-* @par API Usage Example
+* @par Example: Creating Data
 *
 * @code
-* #include <iostream>         // std::cin, std::cout
-* #include <memory>           // std::shared_ptr<>
+* // To create an integer:
+* auto i = bencoding::BInteger::create(5);
 *
-* #include "Decoder.h"        // decode(), DecodingError
-* #include "PrettyPrinter.h"  // getPrettyRepr()
+* // To create a string:
+* auto s = bencoding::BString::create("test");
 *
-* using namespace bencoding;
+* // To create a list:
+* auto l = bencoding::BList::create();
+* l->push_back(bencoding::BInteger::create(1));
+* l->push_back(bencoding::BInteger::create(2));
 *
-* int main() {
-*     try {
-*         // Read and decode input data from the standard input.
-*         std::shared_ptr<BItem> decodedData = decode(std::cin);
+* // To create a dictionary:
+* auto d = bencoding::BDictionary::create();
+* (*d)[bencoding::BString::create("a")] = bencoding::BInteger::create(1);
+* (*d)[bencoding::BString::create("b")] = bencoding::BInteger::create(2);
+* @endcode
+
+* @par Example: Encoding
 *
-*         // Print the decoded data in a readable way to the standard output.
-*         std::cout << getPrettyRepr(decodedData) << "\n";
+* @code
+* std::string encodedData = bencoding::encode(data);
+* @endcode
 *
-*         return 0;
-*     } catch (const DecodingError &ex) {
-*         // There was an error during the decoding.
-*         std::cerr << "error: " << ex.what() << "\n";
-*         return 1;
+* @par Example: Decoding
+*
+* @code
+* auto data = bencoding::decode(stream);
+* if (auto i = data->as<bencoding::BInteger>()) {
+*     std::cout << i->value() << "\n";
+* } else if (auto s = data->as<bencoding::BString>()) {
+*     std::cout << s->value() << "\n";
+* } else if (auto l = data->as<bencoding::BList>()) {
+*     for (auto e : l) {
+*         // ...
+*     }
+* } else if (auto d = data->as<bencoding::BDictionary>()) {
+*     for (auto e : d) {
+*         // ...
 *     }
 * }
 * @endcode
 *
-* See the @c sample/decoder.cpp file for a complete example. Also, see the unit
-* tests in the @c tests directory for additional example of using the API.
+* A better way of traversing the decoded data is to use @ref
+* bencoding::BItemVisitor. For an example, see the implementation of @ref
+* bencoding::PrettyPrinter.
+*
+* @par Example: Pretty Printing
+*
+* @code
+* auto data = bencoding::decode(stream);
+* std::string repr = bencoding::getPrettyRepr(data);
+* std::cout << repr << "\n";
+* @endcode
 */
 
 // Document the bencoding namespace (there is no better place).
